@@ -1,0 +1,19 @@
+---
+title: "datascienceMartin"
+description: Professionally,I am a data scientist.If you are new to R you might find my introductory subjects helpful!
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+```
+![](datasciencemartin.jpg){width=50%}
+
+
+##ABOUT ME:
+
+##DATASCIENCE JOURNEY:

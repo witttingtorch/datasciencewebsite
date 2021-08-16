@@ -1,0 +1,20 @@
+name: "website"
+title: "datascienceMartin"
+description: |
+  datascienceMartin
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Blog"
+      href: Blog.html
+    - icon: fa fa-github
+      href: https://github.com/witttingtorch
+    - icon: fa fa-twitter
+      href: https://twitter.com/datascienceMar1
+    
+output: distill::distill_article
+theme: "Theme.css"
