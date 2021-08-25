@@ -15,8 +15,8 @@ knitr::opts_chunk$set(echo = FALSE)
 On this page you'll find lecture materials and assignments posted weekly. 
 
 # Lecture 1
+The gapminder ~ library (gapminder):is a dependency library on R that can be used to learn more about data through visual exploration.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Blandit turpis cursus in hac habitasse. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Pretium viverra suspendisse potenti nullam.
 
 <aside>
 
@@ -57,8 +57,8 @@ p
 
 Answer the questions below, using the information from Figure \@ref(fig:gdpplot).
  
- 1. Suspendisse sed nisi lacus sed viverra tellus. Faucibus pulvinar elementum integer enim neque volutpat ac. Magna ac placerat vestibulum lectus mauris ultrices eros?
+ 1. Which country has an increasing Economic growth and development from the above figure?
  
- 2. Purus ut faucibus pulvinar elementum integer enim neque volutpat. Duis convallis convallis tellus id interdum velit?
+ 2. Does increase in  GDP per capita mean Longevity ?  
 
 
