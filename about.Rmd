@@ -19,7 +19,6 @@ The gapminder ~ library (gapminder):is a dependency library on R that can be use
 
 
 <aside>
-
 ```{r, eval = TRUE, echo = FALSE}
 library(tidyverse)
 library(gapminder)
