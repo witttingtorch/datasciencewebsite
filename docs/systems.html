@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems — Moses Martin Gikonyo</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+#systems-hero { padding:140px 3rem 5rem; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
+.sh-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(200,169,110,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(200,169,110,.02) 1px,transparent 1px); background-size:44px 44px; }
+.sh-inner { position:relative; z-index:2; }
+.sh-eye { font-family:'Syne Mono',monospace; font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:1rem; margin-bottom:2rem; opacity:0; animation:up .8s ease .2s forwards; }
+.eye-line { width:40px; height:1px; background:var(--gold); }
+.sh-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(3rem,7vw,7rem); text-transform:uppercase; letter-spacing:-.03em; line-height:.9; opacity:0; animation:up .8s ease .4s forwards; }
+.sh-title .outline { -webkit-text-stroke:1.5px var(--gold); color:transparent; }
+.sh-meta { margin-top:2rem; display:flex; gap:3rem; opacity:0; animation:up .8s ease .6s forwards; }
+.sh-stat { font-family:'Syne Mono',monospace; }
+.sh-stat-n { font-size:2rem; font-weight:700; color:var(--gold); font-family:'Syne',sans-serif; }
+.sh-stat-l { font-size:.58rem; letter-spacing:.15em; color:var(--dimmer); text-transform:uppercase; }
+@keyframes up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* SYSTEMS LIST */
+#systems-list { padding:5rem 3rem; }
+.domain-group { margin-top:4rem; }
+.dg-header { display:flex; justify-content:space-between; align-items:center; padding:.6rem 0; border-bottom:2px solid var(--gold); margin-bottom:0; }
+.dg-label { font-family:'Syne',sans-serif; font-weight:700; font-size:.9rem; color:var(--gold); }
+.dg-count { font-family:'Syne Mono',monospace; font-size:.58rem; color:var(--dimmer); letter-spacing:.15em; text-transform:uppercase; }
+
+.proj-row { display:grid; grid-template-columns:70px 1fr 240px 120px; align-items:center; gap:2rem; padding:1.5rem 0; border-bottom:1px solid var(--border); text-decoration:none; color:inherit; transition:all .25s; }
+.proj-row:hover { background:var(--panel); padding:1.5rem 1.2rem; margin:0 -1.2rem; }
+.proj-row.featured { background:rgba(200,169,110,.03); border-left:2px solid var(--gold); padding-left:1rem; }
+.proj-row.featured:hover { background:rgba(200,169,110,.07); }
+.proj-idx { font-family:'Syne Mono',monospace; font-size:.62rem; color:var(--dimmer); }
+.proj-name { font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; margin-bottom:.3rem; }
+.proj-sum { font-size:.9rem; font-style:italic; color:var(--dim); line-height:1.4; }
+.proj-badge { font-family:'Syne Mono',monospace; font-size:.48rem; padding:.12rem .4rem; background:rgba(200,169,110,.1); color:var(--gold); border:1px solid rgba(200,169,110,.3); letter-spacing:.1em; margin-left:.5rem; vertical-align:middle; animation:blink 2s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.proj-stack { display:flex; flex-wrap:wrap; gap:.35rem; justify-content:flex-end; }
+.stag { font-family:'Syne Mono',monospace; font-size:.5rem; letter-spacing:.07em; padding:.15rem .4rem; border:1px solid var(--border); color:var(--dimmer); text-transform:uppercase; }
+.stag.gold { border-color:rgba(200,169,110,.4); color:var(--gold); }
+.proj-arrow { font-family:'Syne Mono',monospace; font-size:.62rem; color:var(--gold); text-align:right; opacity:0; transition:opacity .2s; }
+.proj-row:hover .proj-arrow { opacity:1; }
+
+.proj-footer { margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border); text-align:center; }
+
+@media(max-width:1024px) {
+  .proj-row { grid-template-columns:50px 1fr; }
+  .proj-stack,.proj-arrow { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ti"><span class="ti-lbl">SYSTEMS</span><span class="ti-val">38 Repos · 6 Production Systems · All Open Source · All Deployable Today</span></span>
+    <span class="ti"><span class="ti-lbl">STACK</span><span class="ti-val">Python · R · SQL · PostgreSQL · Docker · Kubernetes · Kafka · dbt · Airflow · Stan · OpenTelemetry</span></span>
+    <span class="ti"><span class="ti-lbl">DOMAINS</span><span class="ti-val">Quant Finance · ML Infrastructure · Data Engineering · Analytics · Causal Inference · Observability</span></span>
+    <span class="ti"><span class="ti-lbl">SYSTEMS</span><span class="ti-val">38 Repos · 6 Production Systems · All Open Source · All Deployable Today</span></span>
+    <span class="ti"><span class="ti-lbl">STACK</span><span class="ti-val">Python · R · SQL · PostgreSQL · Docker · Kubernetes · Kafka · dbt · Airflow · Stan · OpenTelemetry</span></span>
+  </div>
+</div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">M<span>.</span>Gikonyo</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="systems.html" class="active">Systems</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="https://github.com/witttingtorch" target="_blank">GitHub ↗</a></li>
+    <li><a href="https://www.linkedin.com/in/moses-martin-njuguna-gikonyo-b28519192/" target="_blank">LinkedIn ↗</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>Available for opportunities</div>
+</nav>
+
+<section id="systems-hero">
+  <div class="sh-grid"></div>
+  <div class="sh-inner">
+    <div class="sh-eye"><div class="eye-line"></div>Open Source · Production Grade</div>
+    <h1 class="sh-title">Deployed<br><span class="outline">Systems</span></h1>
+    <div class="sh-meta">
+      <div class="sh-stat"><div class="sh-stat-n">38</div><div class="sh-stat-l">Total Repos</div></div>
+      <div class="sh-stat"><div class="sh-stat-n">8</div><div class="sh-stat-l">Domains</div></div>
+      <div class="sh-stat"><div class="sh-stat-n">2</div><div class="sh-stat-l">Live Nodes</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="systems-list">
+
+  <!-- QUANT FINANCE -->
+  <div class="domain-group reveal">
+    <div class="dg-header"><span class="dg-label">Quantitative Finance & Markets</span><span class="dg-count">3 systems</span></div>
+    <a href="https://github.com/witttingtorch/frontier-market-regime" target="_blank" class="proj-row featured">
+      <div class="proj-idx">★</div>
+      <div><div class="proj-name">Frontier Market Regime Classification <span class="proj-badge">LIVE</span></div><div class="proj-sum">Hybrid Human-Quantitative regime classification. Live nodes: Nairobi (KES) and Baku (AZN). Python pipeline, Streamlit dashboard, daily logging.</div></div>
+      <div class="proj-stack"><span class="stag gold">HMM</span><span class="stag gold">Bayesian</span><span class="stag gold">Streamlit</span><span class="stag gold">Live</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/algorithmic-trading-system" target="_blank" class="proj-row">
+      <div class="proj-idx">01 /</div>
+      <div><div class="proj-name">Algorithmic Trading System</div><div class="proj-sum">Institutional-style quant research — alpha factor research, strategy backtesting, walk-forward validation</div></div>
+      <div class="proj-stack"><span class="stag">Python</span><span class="stag">Alpha Factors</span><span class="stag">Backtesting</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/blackscholes-engine" target="_blank" class="proj-row">
+      <div class="proj-idx">02 /</div>
+      <div><div class="proj-name">Black-Scholes Engine</div><div class="proj-sum">Modular Python pricing engine — numerical methods, Monte Carlo simulation, stochastic modelling, performance benchmarking</div></div>
+      <div class="proj-stack"><span class="stag">Monte Carlo</span><span class="stag">Stochastic</span><span class="stag">Jupyter</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+  </div>
+
+  <!-- ML INFRASTRUCTURE -->
+  <div class="domain-group reveal">
+    <div class="dg-header"><span class="dg-label">ML Infrastructure & Feature Engineering</span><span class="dg-count">3 systems</span></div>
+    <a href="https://github.com/witttingtorch/production-feature-store" target="_blank" class="proj-row">
+      <div class="proj-idx">01 /</div>
+      <div><div class="proj-name">Production Feature Store</div><div class="proj-sum">Point-in-time correctness, freshness SLAs, training–serving skew detection — ML infrastructure at production standards</div></div>
+      <div class="proj-stack"><span class="stag">ML Infra</span><span class="stag">Feature Store</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/feed-ranking-system" target="_blank" class="proj-row">
+      <div class="proj-idx">02 /</div>
+      <div><div class="proj-name">Feed Ranking System</div><div class="proj-sum">Production-style feed ranking — GBDT ranking, multi-objective re-ranking, counterfactual evaluation with IPS/SNIPS, end-to-end inference under latency</div></div>
+      <div class="proj-stack"><span class="stag">GBDT</span><span class="stag">IPS/SNIPS</span><span class="stag">Ranking</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/nlp-intelligence-platform" target="_blank" class="proj-row">
+      <div class="proj-idx">03 /</div>
+      <div><div class="proj-name">NLP Intelligence Platform</div><div class="proj-sum">Production-grade NLP — model training, inference, monitoring, privacy compliance, and streaming architecture</div></div>
+      <div class="proj-stack"><span class="stag">NLP</span><span class="stag">Inference</span><span class="stag">Streaming</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+  </div>
+
+  <!-- DATA ENGINEERING -->
+  <div class="domain-group reveal">
+    <div class="dg-header"><span class="dg-label">Data Engineering & Cloud Infrastructure</span><span class="dg-count">3 systems</span></div>
+    <a href="https://github.com/witttingtorch/cloud-analytics-platform" target="_blank" class="proj-row">
+      <div class="proj-idx">01 /</div>
+      <div><div class="proj-name">Cloud Analytics Platform</div><div class="proj-sum">Reference architecture for production-scale cloud data & ML — AWS + GCP, Airflow, dbt, Kafka, ML pipelines</div></div>
+      <div class="proj-stack"><span class="stag">AWS</span><span class="stag">GCP</span><span class="stag">Kafka</span><span class="stag">dbt</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/smart-farm-analytics-platform" target="_blank" class="proj-row">
+      <div class="proj-idx">02 /</div>
+      <div><div class="proj-name">Smart Farm Analytics Platform</div><div class="proj-sum">dbt, multi-warehouse ingestion (Postgres, Snowflake, BigQuery), SCD Type 2 dimensions, time-series KPI engineering</div></div>
+      <div class="proj-stack"><span class="stag">dbt</span><span class="stag">Snowflake</span><span class="stag">BigQuery</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/cloud-payments-fraud-analytics-platform" target="_blank" class="proj-row">
+      <div class="proj-idx">03 /</div>
+      <div><div class="proj-name">Cloud Payments Fraud Analytics</div><div class="proj-sum">Large-scale real-time payments fraud and risk — streaming ML inference, Kafka, compliance-first system design</div></div>
+      <div class="proj-stack"><span class="stag">Kafka</span><span class="stag">Streaming</span><span class="stag">Fraud ML</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+  </div>
+
+  <!-- ANALYTICS & EXPERIMENTATION -->
+  <div class="domain-group reveal">
+    <div class="dg-header"><span class="dg-label">Product Analytics & Experimentation</span><span class="dg-count">5 systems</span></div>
+    <a href="https://github.com/witttingtorch/ab-testing-senior-experimentation" target="_blank" class="proj-row">
+      <div class="proj-idx">01 /</div>
+      <div><div class="proj-name">Senior A/B Experimentation Framework</div><div class="proj-sum">CUPED variance reduction, sequential testing, BH correction — institutional experimentation standards</div></div>
+      <div class="proj-stack"><span class="stag">CUPED</span><span class="stag">Sequential</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/subscription-style-experimentation" target="_blank" class="proj-row">
+      <div class="proj-idx">02 /</div>
+      <div><div class="proj-name">Subscription-Style Experimentation</div><div class="proj-sum">Bayesian inference, retention modelling, experimentation framework for subscription product analytics</div></div>
+      <div class="proj-stack"><span class="stag">Bayesian</span><span class="stag">Retention</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/churn-analytics-saas" target="_blank" class="proj-row">
+      <div class="proj-idx">03 /</div>
+      <div><div class="proj-name">Churn Analytics SaaS</div><div class="proj-sum">PostgreSQL-backed retention intelligence — survival analysis, Kaplan-Meier, LTV modelling at production scale</div></div>
+      <div class="proj-stack"><span class="stag">Survival</span><span class="stag">PostgreSQL</span><span class="stag">LTV</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/customer-lifetime-value-platform" target="_blank" class="proj-row">
+      <div class="proj-idx">04 /</div>
+      <div><div class="proj-name">Customer Lifetime Value Platform</div><div class="proj-sum">BG/NBD + Gamma-Gamma CLV engine — SQL, Python, R, Docker, Kubernetes — enterprise-scale deployment</div></div>
+      <div class="proj-stack"><span class="stag">BG/NBD</span><span class="stag">Docker</span><span class="stag">K8s</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/funnel-growth-analytics-platform" target="_blank" class="proj-row">
+      <div class="proj-idx">05 /</div>
+      <div><div class="proj-name">Funnel & Growth Analytics Platform</div><div class="proj-sum">FAANG-style AARRR funnel analytics — PostgreSQL + Kubernetes, cohort analysis, drop-off intelligence</div></div>
+      <div class="proj-stack"><span class="stag">R</span><span class="stag">AARRR</span><span class="stag">K8s</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+  </div>
+
+  <!-- CAUSAL INFERENCE -->
+  <div class="domain-group reveal">
+    <div class="dg-header"><span class="dg-label">Causal Inference & Bayesian Methods</span><span class="dg-count">2 systems</span></div>
+    <a href="https://github.com/witttingtorch/bayesian-incrementality-geo-lift" target="_blank" class="proj-row">
+      <div class="proj-idx">01 /</div>
+      <div><div class="proj-name">Bayesian Incrementality & Geo-Lift</div><div class="proj-sum">Causal inference for true marketing incrementality — geographic treatment/control, posterior uncertainty quantification</div></div>
+      <div class="proj-stack"><span class="stag">Bayesian</span><span class="stag">Causal</span><span class="stag">Geo-Lift</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/recommender-evaluation-framework" target="_blank" class="proj-row">
+      <div class="proj-idx">02 /</div>
+      <div><div class="proj-name">Recommender Evaluation Framework</div><div class="proj-sum">Production-grade recommender evaluation — metrics, bias detection, and decision safety at scale</div></div>
+      <div class="proj-stack"><span class="stag">RecSys</span><span class="stag">Bias</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+  </div>
+
+  <!-- OBSERVABILITY -->
+  <div class="domain-group reveal">
+    <div class="dg-header"><span class="dg-label">Infrastructure, Reliability & Observability</span><span class="dg-count">2 systems</span></div>
+    <a href="https://github.com/witttingtorch/observability-one" target="_blank" class="proj-row">
+      <div class="proj-idx">01 /</div>
+      <div><div class="proj-name">Observability One</div><div class="proj-sum">Enterprise observability — RCA algorithms, OpenTelemetry integration, multi-vendor distributed tracing</div></div>
+      <div class="proj-stack"><span class="stag">OTel</span><span class="stag">RCA</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/infra-metrics-reliability-platform" target="_blank" class="proj-row">
+      <div class="proj-idx">02 /</div>
+      <div><div class="proj-name">Infra Metrics Reliability Platform</div><div class="proj-sum">Batch-first infrastructure reliability analytics — SLOs, error budgets, change impact analysis</div></div>
+      <div class="proj-stack"><span class="stag">SLOs</span><span class="stag">Error Budgets</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+  </div>
+
+  <!-- DOMAIN ANALYTICS -->
+  <div class="domain-group reveal">
+    <div class="dg-header"><span class="dg-label">Domain-Specific Analytics</span><span class="dg-count">3 systems</span></div>
+    <a href="https://github.com/witttingtorch/healthcare-operations-analytics-consulting" target="_blank" class="proj-row">
+      <div class="proj-idx">01 /</div>
+      <div><div class="proj-name">Healthcare Operations Analytics</div><div class="proj-sum">Consulting-style healthcare analytics — SQL KPIs, ETL pipelines, dashboards, Agile documentation</div></div>
+      <div class="proj-stack"><span class="stag">SQL</span><span class="stag">ETL</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/global-salary-grouping-insights" target="_blank" class="proj-row">
+      <div class="proj-idx">02 /</div>
+      <div><div class="proj-name">Global Salary Grouping Insights</div><div class="proj-sum">Production analytics for grouping countries into fair global salary tiers using purchasing-power–adjusted compensation data</div></div>
+      <div class="proj-stack"><span class="stag">PPP</span><span class="stag">Clustering</span><span class="stag">Python</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+    <a href="https://github.com/witttingtorch/PCEA-Githunguri-Presbytery-Youth-Summit-Registration-Pipeline" target="_blank" class="proj-row">
+      <div class="proj-idx">03 /</div>
+      <div><div class="proj-name">PCEA Youth Summit Registration Pipeline <span class="proj-badge" style="background:rgba(0,255,135,.08);color:var(--green);border-color:rgba(0,255,135,.3)">Pro Bono</span></div><div class="proj-sum">Automated registration for 1000+ youth delegates — reduced check-in from hours to minutes</div></div>
+      <div class="proj-stack"><span class="stag">Python</span><span class="stag">Automation</span><span class="stag">Pipeline</span></div>
+      <div class="proj-arrow">View →</div>
+    </a>
+  </div>
+
+  <div class="proj-footer">
+    <a href="https://github.com/witttingtorch?tab=repositories" target="_blank" class="btn-ghost">View All 38 Repositories on GitHub ↗</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span>© 2026 Moses Martin Njuguna Gikonyo · Nairobi, Kenya</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="writing.html">Writing</a>
+    <a href="https://github.com/witttingtorch" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='18px';cursor.style.height='18px';ring.style.width='55px';ring.style.height='55px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='8px';cursor.style.height='8px';ring.style.width='32px';ring.style.height='32px';});
+});
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(r=>revealObs.observe(r));
+</script>
+</body>
+</html>

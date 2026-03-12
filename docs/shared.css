@@ -1,0 +1,92 @@
+/* ============================================================
+   MARTIN GIKONYO — SHARED DESIGN SYSTEM
+   All 4 pages import this
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:    #060608;
+  --dark:     #0C0D10;
+  --panel:    #111318;
+  --border:   rgba(255,255,255,0.06);
+  --gold:     #C8A96E;
+  --gold-dim: rgba(200,169,110,0.12);
+  --gold-glow:rgba(200,169,110,0.04);
+  --green:    #00FF87;
+  --green-dim:rgba(0,255,135,0.08);
+  --white:    #F0EDE8;
+  --dim:      rgba(240,237,232,0.48);
+  --dimmer:   rgba(240,237,232,0.22);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'EB Garamond', serif; overflow-x: hidden; cursor: none; }
+
+/* CURSOR */
+.cursor      { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .2s,height .2s; }
+.cursor-ring { position:fixed; width:32px; height:32px; border:1px solid rgba(200,169,110,.45); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s,height .3s; }
+
+/* TICKER */
+.ticker { position:fixed; top:0; left:0; right:0; height:26px; background:var(--dark); border-bottom:1px solid var(--border); display:flex; align-items:center; overflow:hidden; z-index:100; }
+.ticker-inner { display:flex; gap:4rem; animation:tick 40s linear infinite; white-space:nowrap; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ti { font-family:'Syne Mono',monospace; font-size:.58rem; letter-spacing:.1em; display:flex; align-items:center; gap:.5rem; }
+.ti-lbl { color:var(--dimmer); }
+.ti-val { color:var(--green); }
+
+/* NAV */
+nav.site-nav { position:fixed; top:26px; left:0; right:0; height:52px; background:rgba(6,6,8,.97); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 3rem; z-index:99; }
+.nav-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:.82rem; letter-spacing:.15em; text-transform:uppercase; color:var(--white); text-decoration:none; }
+.nav-logo span { color:var(--gold); }
+.nav-links { display:flex; gap:0; list-style:none; }
+.nav-links a { font-family:'Syne Mono',monospace; font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); text-decoration:none; padding:.4rem 1rem; transition:color .2s; border-bottom:2px solid transparent; }
+.nav-links a:hover, .nav-links a.active { color:var(--gold); border-bottom-color:var(--gold); }
+.nav-status { font-family:'Syne Mono',monospace; font-size:.58rem; color:var(--green); letter-spacing:.1em; display:flex; align-items:center; gap:.5rem; }
+.status-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:blink 2s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+/* PAGE WRAPPER */
+.page-wrap { padding-top: 78px; min-height: 100vh; }
+
+/* SECTION HELPERS */
+.sec-eye { font-family:'Syne Mono',monospace; font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:1rem; margin-bottom:1.25rem; }
+.sec-eye::after { content:''; flex:1; height:1px; background:var(--border); }
+.sec-h { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(2.5rem,5vw,5rem); text-transform:uppercase; letter-spacing:-.02em; line-height:.95; }
+.sec-h span { color:var(--gold); }
+.sec-h .outline { -webkit-text-stroke:1px var(--gold); color:transparent; }
+
+/* BUTTONS */
+.btn-gold { font-family:'Syne Mono',monospace; font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; padding:.85rem 2rem; background:var(--gold); color:var(--black); text-decoration:none; font-weight:700; transition:background .2s; display:inline-block; }
+.btn-gold:hover { background:var(--white); }
+.btn-ghost { font-family:'Syne Mono',monospace; font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; padding:.85rem 2rem; border:1px solid var(--border); color:var(--dim); text-decoration:none; transition:all .2s; display:inline-block; }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+
+/* TAGS */
+.tag { font-family:'Syne Mono',monospace; font-size:.52rem; padding:.2rem .55rem; background:var(--gold-dim); color:var(--gold); letter-spacing:.07em; text-transform:uppercase; }
+.tag.green { background:var(--green-dim); color:var(--green); }
+.tag.ghost { background:transparent; border:1px solid var(--border); color:var(--dimmer); }
+
+/* FOOTER */
+.site-footer { padding:2rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; margin-top:6rem; }
+.site-footer span { font-family:'Syne Mono',monospace; font-size:.58rem; letter-spacing:.1em; color:var(--dimmer); }
+.footer-links { display:flex; gap:2rem; }
+.footer-links a { font-family:'Syne Mono',monospace; font-size:.58rem; letter-spacing:.1em; color:var(--dimmer); text-decoration:none; text-transform:uppercase; transition:color .2s; }
+.footer-links a:hover { color:var(--gold); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--black); }
+::-webkit-scrollbar-thumb { background:var(--gold); }
+::selection { background:var(--gold-dim); color:var(--gold); }
+
+/* ANIMATIONS */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:768px) {
+  nav.site-nav { padding:0 1.5rem; }
+  .nav-status { display:none; }
+}

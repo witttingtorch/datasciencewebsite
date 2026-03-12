@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Moses Martin Gikonyo</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+#writing-hero { padding:140px 3rem 5rem; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
+.wh-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(200,169,110,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(200,169,110,.02) 1px,transparent 1px); background-size:44px 44px; }
+.wh-inner { position:relative; z-index:2; max-width:800px; }
+.wh-eye { font-family:'Syne Mono',monospace; font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:1rem; margin-bottom:2rem; opacity:0; animation:up .8s ease .2s forwards; }
+.eye-line { width:40px; height:1px; background:var(--gold); }
+.wh-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(3rem,7vw,7rem); text-transform:uppercase; letter-spacing:-.03em; line-height:.9; opacity:0; animation:up .8s ease .4s forwards; }
+.wh-title .outline { -webkit-text-stroke:1.5px var(--gold); color:transparent; }
+.wh-sub { margin-top:2rem; font-size:1.15rem; font-style:italic; color:var(--dim); line-height:1.65; opacity:0; animation:up .8s ease .6s forwards; }
+@keyframes up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* CATEGORIES */
+#categories { padding:2rem 3rem; border-bottom:1px solid var(--border); display:flex; gap:.5rem; flex-wrap:wrap; }
+.cat-btn { font-family:'Syne Mono',monospace; font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; padding:.4rem 1rem; border:1px solid var(--border); color:var(--dim); background:transparent; cursor:none; transition:all .2s; }
+.cat-btn:hover, .cat-btn.active { border-color:var(--gold); color:var(--gold); background:var(--gold-dim); }
+
+/* POSTS */
+#posts { padding:4rem 3rem; }
+.post-row { display:grid; grid-template-columns:120px 1fr auto; gap:3rem; align-items:start; padding:2.5rem 0; border-bottom:1px solid var(--border); text-decoration:none; color:inherit; transition:all .25s; cursor:none; }
+.post-row:hover { background:var(--panel); padding:2.5rem 1.5rem; margin:0 -1.5rem; }
+.post-date { font-family:'Syne Mono',monospace; font-size:.6rem; letter-spacing:.12em; color:var(--gold); text-transform:uppercase; line-height:1.6; padding-top:.2rem; }
+.post-content {}
+.post-cat { font-family:'Syne Mono',monospace; font-size:.55rem; letter-spacing:.15em; text-transform:uppercase; color:var(--dimmer); margin-bottom:.5rem; }
+.post-title { font-family:'Syne',sans-serif; font-weight:700; font-size:1.3rem; color:var(--white); margin-bottom:.6rem; line-height:1.2; letter-spacing:-.01em; }
+.post-summary { font-size:.95rem; font-style:italic; color:var(--dim); line-height:1.6; }
+.post-tags { margin-top:.85rem; display:flex; flex-wrap:wrap; gap:.35rem; }
+.post-arrow { font-family:'Syne Mono',monospace; font-size:.65rem; color:var(--gold); opacity:0; transition:opacity .2s; padding-top:.2rem; white-space:nowrap; }
+.post-row:hover .post-arrow { opacity:1; }
+
+/* FEATURED POST */
+.post-row.featured { background:rgba(200,169,110,.03); border-left:2px solid var(--gold); padding-left:1.5rem; }
+.post-row.featured:hover { background:rgba(200,169,110,.07); }
+.featured-badge { font-family:'Syne Mono',monospace; font-size:.48rem; padding:.12rem .4rem; background:rgba(200,169,110,.1); color:var(--gold); border:1px solid rgba(200,169,110,.3); letter-spacing:.1em; margin-left:.6rem; vertical-align:middle; }
+
+/* NEWSLETTER */
+#newsletter { padding:5rem 3rem; border-top:1px solid var(--border); background:var(--dark); display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.nl-left h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:2.5rem; text-transform:uppercase; letter-spacing:-.02em; line-height:.95; }
+.nl-left h2 span { color:var(--gold); }
+.nl-left p { margin-top:1.25rem; font-style:italic; color:var(--dim); font-size:1.05rem; line-height:1.65; }
+.nl-topics { margin-top:2rem; display:flex; flex-direction:column; gap:.5rem; }
+.nl-topic { display:flex; align-items:center; gap:.75rem; font-family:'Syne Mono',monospace; font-size:.62rem; letter-spacing:.08em; color:var(--dim); }
+.nl-topic::before { content:'▸'; color:var(--gold); }
+.nl-right { display:flex; flex-direction:column; gap:1rem; }
+.nl-field { background:var(--black); border:1px solid var(--border); padding:1rem 1.25rem; font-family:'Syne Mono',monospace; font-size:.72rem; color:var(--white); width:100%; outline:none; transition:border-color .2s; }
+.nl-field:focus { border-color:var(--gold); }
+.nl-field::placeholder { color:var(--dimmer); }
+
+@media(max-width:1024px) {
+  .post-row { grid-template-columns:90px 1fr; }
+  .post-arrow { display:none; }
+  #newsletter { grid-template-columns:1fr; gap:3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ti"><span class="ti-lbl">WRITING</span><span class="ti-val">Quantitative Finance · Frontier Markets · ML Engineering · Data Science · Experimentation · R Tutorials</span></span>
+    <span class="ti"><span class="ti-lbl">RESEARCH</span><span class="ti-val">Frontier Market Regime Classification · Bayesian Methods · Survival Analysis · Causal Inference</span></span>
+    <span class="ti"><span class="ti-lbl">WRITING</span><span class="ti-val">Quantitative Finance · Frontier Markets · ML Engineering · Data Science · Experimentation · R Tutorials</span></span>
+    <span class="ti"><span class="ti-lbl">RESEARCH</span><span class="ti-val">Frontier Market Regime Classification · Bayesian Methods · Survival Analysis · Causal Inference</span></span>
+  </div>
+</div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">M<span>.</span>Gikonyo</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="systems.html">Systems</a></li>
+    <li><a href="writing.html" class="active">Writing</a></li>
+    <li><a href="https://github.com/witttingtorch" target="_blank">GitHub ↗</a></li>
+    <li><a href="https://www.linkedin.com/in/moses-martin-njuguna-gikonyo-b28519192/" target="_blank">LinkedIn ↗</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>Available for opportunities</div>
+</nav>
+
+<section id="writing-hero">
+  <div class="wh-grid"></div>
+  <div class="wh-inner">
+    <div class="wh-eye"><div class="eye-line"></div>Research & Thinking</div>
+    <h1 class="wh-title">Writing &<br><span class="outline">Research</span></h1>
+    <p class="wh-sub">I document my work across quantitative finance, frontier market research, machine learning, and data science. Written for practitioners — expect rigour, code, and real-world application.</p>
+  </div>
+</section>
+
+<div id="categories">
+  <button class="cat-btn active">All</button>
+  <button class="cat-btn">Quant Finance</button>
+  <button class="cat-btn">Frontier Markets</button>
+  <button class="cat-btn">ML Engineering</button>
+  <button class="cat-btn">Experimentation</button>
+  <button class="cat-btn">R Tutorials</button>
+  <button class="cat-btn">Career</button>
+</div>
+
+<section id="posts">
+
+  <a href="https://witttingtorch.github.io/datasciencewebsite/posts/2026-03-12-building-in-public-my-github-project-portfolio/" target="_blank" class="post-row featured reveal">
+    <div class="post-date">Mar 12<br>2026</div>
+    <div class="post-content">
+      <div class="post-cat">Career · Open Source</div>
+      <div class="post-title">Building in Public: My GitHub Project Portfolio <span class="featured-badge">Latest</span></div>
+      <div class="post-summary">A walkthrough of all 6 pinned production systems — churn analytics, CLV platform, Bayesian geo-lift, A/B experimentation, funnel analytics, and observability infrastructure. Why I build in public and what institutional-grade means in practice.</div>
+      <div class="post-tags"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">Open Source</span></div>
+    </div>
+    <div class="post-arrow">Read →</div>
+  </a>
+
+  <div class="post-row reveal" style="cursor:default">
+    <div class="post-date">Coming<br>Soon</div>
+    <div class="post-content">
+      <div class="post-cat">Quant Finance · Frontier Markets</div>
+      <div class="post-title">Regime Classification in Frontier Markets: Why HMM and Not Neural Networks</div>
+      <div class="post-summary">A deep dive into why Hidden Markov Models outperform neural networks for regime detection in sparse frontier market data. The curse of dimensionality, interpretability, and why institutional desks prefer probabilistic models.</div>
+      <div class="post-tags"><span class="tag">HMM</span><span class="tag">Frontier Markets</span><span class="tag">Python</span><span class="tag">Regime</span></div>
+    </div>
+    <div class="post-arrow">Coming →</div>
+  </div>
+
+  <div class="post-row reveal" style="cursor:default">
+    <div class="post-date">Coming<br>Soon</div>
+    <div class="post-content">
+      <div class="post-cat">Experimentation Science</div>
+      <div class="post-title">CUPED Explained: How to Run Faster A/B Tests Without Lying to Yourself</div>
+      <div class="post-summary">CUPED (Controlled-experiment Using Pre-Experiment Data) reduces variance in A/B tests by exploiting correlation with pre-experiment covariates. Walk-through from first principles to production implementation with Python code.</div>
+      <div class="post-tags"><span class="tag">CUPED</span><span class="tag">A/B Testing</span><span class="tag">Python</span><span class="tag">Stats</span></div>
+    </div>
+    <div class="post-arrow">Coming →</div>
+  </div>
+
+  <div class="post-row reveal" style="cursor:default">
+    <div class="post-date">Coming<br>Soon</div>
+    <div class="post-content">
+      <div class="post-cat">Causal Inference</div>
+      <div class="post-title">Why Most Marketing Attribution Is Wrong — and How to Fix It with Geo-Lift</div>
+      <div class="post-summary">Platform-reported ROAS is fiction. This post explains why, then walks through the Bayesian geo-lift methodology for measuring true marketing incrementality — from experimental design to posterior inference.</div>
+      <div class="post-tags"><span class="tag">Causal Inference</span><span class="tag">Bayesian</span><span class="tag">Geo-Lift</span><span class="tag">Marketing</span></div>
+    </div>
+    <div class="post-arrow">Coming →</div>
+  </div>
+
+  <div class="post-row reveal" style="cursor:default">
+    <div class="post-date">Coming<br>Soon</div>
+    <div class="post-content">
+      <div class="post-cat">ML Engineering</div>
+      <div class="post-title">Survival Analysis for Churn: Why Binary Classification Misses the Point</div>
+      <div class="post-summary">A binary churn model tells you who will churn. A survival model tells you when — and that changes everything downstream. Cox proportional hazards and Kaplan-Meier from theory to production PostgreSQL deployment.</div>
+      <div class="post-tags"><span class="tag">Survival Analysis</span><span class="tag">Cox PH</span><span class="tag">Python</span><span class="tag">PostgreSQL</span></div>
+    </div>
+    <div class="post-arrow">Coming →</div>
+  </div>
+
+  <div class="post-row reveal" style="cursor:default">
+    <div class="post-date">Coming<br>Soon</div>
+    <div class="post-content">
+      <div class="post-cat">R Tutorials</div>
+      <div class="post-title">Getting Started with R for Data Science: Gapminder, ggplot2, and the Grammar of Graphics</div>
+      <div class="post-summary">The tutorial that started datascienceMartin. Using the gapminder dataset to learn R, ggplot2, and the grammar of graphics from first principles. Built for absolute beginners with no maths background required.</div>
+      <div class="post-tags"><span class="tag">R</span><span class="tag">ggplot2</span><span class="tag">Gapminder</span><span class="tag">Beginners</span></div>
+    </div>
+    <div class="post-arrow">Coming →</div>
+  </div>
+
+</section>
+
+<section id="newsletter">
+  <div class="nl-left">
+    <h2>Stay<br><span>Informed</span></h2>
+    <p>I write about quantitative finance, frontier market research, and production ML — for practitioners, not academics.</p>
+    <div class="nl-topics">
+      <div class="nl-topic">Frontier market regime research & live signals</div>
+      <div class="nl-topic">Quantitative methods — HMM, Bayesian, survival analysis</div>
+      <div class="nl-topic">Production ML engineering & data systems</div>
+      <div class="nl-topic">Experimentation science & causal inference</div>
+      <div class="nl-topic">R & Python tutorials for practitioners</div>
+    </div>
+  </div>
+  <div class="nl-right">
+    <p style="font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:.5rem">Get notified when I publish</p>
+    <input class="nl-field" type="text" placeholder="Your name">
+    <input class="nl-field" type="email" placeholder="Your email">
+    <a href="mailto:contact@martingikonyo.com" class="btn-gold" style="text-align:center">Subscribe →</a>
+    <p style="font-family:'Syne Mono',monospace;font-size:.55rem;color:var(--dimmer);letter-spacing:.08em;text-align:center">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span>© 2026 Moses Martin Njuguna Gikonyo · Nairobi, Kenya</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="systems.html">Systems</a>
+    <a href="https://github.com/witttingtorch" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='18px';cursor.style.height='18px';ring.style.width='55px';ring.style.height='55px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='8px';cursor.style.height='8px';ring.style.width='32px';ring.style.height='32px';});
+});
+
+// Category filter buttons
+document.querySelectorAll('.cat-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(r=>revealObs.observe(r));
+</script>
+</body>
+</html>
