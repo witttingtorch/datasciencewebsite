@@ -1,0 +1,26 @@
+---
+title: "Moses Martin Njuguna Gikonyo"
+description: "Data Scientist | Quantitative Financial Engineer | Frontier Market Intelligence | Nairobi, Kenya"
+site: distill::distill_website
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+![](datasciencemartin.jpg){width=50%}
+
+## About Me
+
+I am **Moses Martin Njuguna Gikonyo**, a Data Scientist and Quantitative Financial Engineer based in Nairobi, Kenya. I specialise in applied machine learning, data visualisation, and quantitative finance, with a strong foundation in both R and Python.
+
+I completed my **Applied Data Science** programme and am commencing my **MSc in Financial Engineering at WorldQuant University** in April 2026, further deepening my expertise in quantitative methods and financial modelling.
+
+My current work focuses on building a **frontier market regime classification framework**, with a live node operating in Baku — applying cutting-edge machine learning techniques to emerging and frontier market intelligence.
+
+## My Data Science Journey
+
+I launched this site in **2021** as a resource for those beginning their journey in R and data science. What started as a personal learning log has grown into a platform reflecting years of hands-on experience across industries.
+
+My technical toolkit includes **R & R Markdown, Python, Machine Learning, and Data Visualization** — applied across projects ranging from churn analytics and customer lifetime value platforms to Bayesian causal inference and A/B experimentation frameworks.
+
+If you are new to R, explore my introductory content — built from the ground up with beginners in mind.

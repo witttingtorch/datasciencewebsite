@@ -1,0 +1,97 @@
+---
+title: "Moses Martin Njuguna Gikonyo"
+date: "`r Sys.Date()`"
+description: |
+  Data Scientist | Quantitative Financial Engineer | Frontier Market Intelligence
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## About Me
+
+I am a Data Scientist and Quantitative Financial Engineer based in Nairobi, Kenya, operating at the intersection of machine learning, quantitative finance, and frontier market intelligence. I completed an **Applied Data Science** programme and am commencing my **MSc in Financial Engineering at WorldQuant University** in April 2026.
+
+My work is defined by rigour, systems thinking, and a commitment to building production-grade analytical frameworks — not just models, but deployable intelligence systems.
+
+---
+
+## Current Research
+
+I am currently building a **Frontier Market Regime Classification Framework**, with a live operational node in Baku. This project applies advanced machine learning techniques to classify macroeconomic and market regimes across frontier and emerging markets — an underserved space in quantitative research with significant alpha generation potential.
+
+**Core methods include:**
+
+- Hidden Markov Models (HMM) for regime detection
+- Bayesian inference for uncertainty quantification
+- Time-series feature engineering across macroeconomic indicators
+- Live data pipeline with a Baku node for real-time regime signals
+
+---
+
+## Selected Projects
+
+### Churn Analytics SaaS
+A PostgreSQL-backed churn analytics platform incorporating retention modelling, survival analysis, and LTV estimation. Built for production deployment using Python.
+
+### Customer Lifetime Value Platform
+A production-grade CLV analytics system built with SQL, Python, R, Docker, and Kubernetes — designed for enterprise-scale customer intelligence.
+
+### Bayesian Incrementality & Geo-Lift
+Bayesian causal inference framework for measuring true marketing incrementality using geo-based experiments — separating signal from noise in marketing attribution.
+
+### A/B Testing & Senior Experimentation Framework
+An end-to-end experimentation platform for rigorous A/B testing, designed to meet senior-level statistical standards across product and growth teams.
+
+### Funnel & Growth Analytics Platform
+A FAANG-style funnel and growth analytics platform built with PostgreSQL, SQL, Python, R, Docker, and Kubernetes.
+
+---
+
+## Teaching & Lecture Materials
+
+I launched this site in 2021 as an educational resource for those beginning their journey in R and data science. Below is an example from **Lecture 1**, introducing the `gapminder` dataset — a powerful tool for understanding global development trends through visual exploration.
+
+### Lecture 1 — Exploring Global Development with Gapminder
+
+The `gapminder` library in R provides clean, curated data on GDP per capita, life expectancy, and population across countries and time. It is an excellent entry point for learning data visualisation and exploratory data analysis.
+
+The chart below plots **GDP per capita against life expectancy in 1977**, with bubble size representing population and colour representing continent. It raises a fundamental question in development economics: does wealth buy longevity?
+```{r gdpplot, eval=TRUE, echo=FALSE, fig.cap="GDP per Capita vs Life Expectancy by Continent (1977)"}
+library(tidyverse)
+library(gapminder)
+
+p <- gapminder %>%
+  filter(year == 1977) %>%
+  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) +
+  geom_point(alpha = 0.7) +
+  scale_x_log10(labels = scales::comma) +
+  labs(
+    x = "GDP per Capita (log scale)",
+    y = "Life Expectancy (years)",
+    size = "Population",
+    color = "Continent",
+    title = "Wealth vs Longevity Across Nations (1977)"
+  ) +
+  theme_bw()
+p
+```
+
+**Discussion Questions:**
+
+1. Which countries demonstrate the strongest correlation between economic growth and increasing life expectancy?
+2. Does a higher GDP per capita reliably predict greater longevity — and where does this relationship break down?
+
+---
+
+## Technical Stack
+
+| Domain | Tools |
+|---|---|
+| Languages | R, Python, SQL |
+| ML & Stats | scikit-learn, tidymodels, Stan, HMM |
+| Data Engineering | PostgreSQL, Docker, Kubernetes |
+| Visualisation | ggplot2, Plotly, Matplotlib |
+| Finance | Quantitative modelling, regime classification |
+| Reporting | R Markdown, Distill, Quarto |
+

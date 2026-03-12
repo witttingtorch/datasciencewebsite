@@ -1,0 +1,35 @@
+---
+title: "Blog"
+listing: posts
+site: distill::distill_website
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Welcome to My Blog
+
+This is where I document my work, research, and thinking across quantitative finance, machine learning, and frontier market intelligence. Posts are written for practitioners — expect rigour, code, and real-world application.
+
+---
+
+## What to Expect
+
+### Quantitative Finance & Markets
+Deep dives into financial modelling, regime classification, factor research, and quantitative strategies — with a focus on frontier and emerging markets where data is sparse and alpha is real.
+
+### Frontier Market Research
+Original research on macroeconomic dynamics, market microstructure, and regime behaviour across East Africa, the Caucasus, and other underserved markets in the quantitative research space.
+
+### Machine Learning
+Applied ML for finance and data science — from Bayesian inference and Hidden Markov Models to production-grade pipelines and model deployment.
+
+### R & Data Science Tutorials
+Practical, code-first tutorials in R and Python. Whether you are just starting out or levelling up, these posts are built around real datasets and real problems.
+
+### Career & Learning Journey
+Honest reflections on the path from curiosity to professional practice — navigating an MSc in Financial Engineering, building open-source projects, and operating as a quant in East Africa.
+
+---
+
+*First post coming soon. Follow along on [GitHub](https://github.com/witttingtorch) for live project updates.*
