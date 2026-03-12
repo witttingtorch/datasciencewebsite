@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moses Martin Njuguna Gikonyo — Quantitative Data Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Syne+Mono&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black: #060608;
+  --dark: #0C0D10;
+  --panel: #111318;
+  --border: rgba(255,255,255,0.06);
+  --gold: #C8A96E;
+  --gold-dim: rgba(200,169,110,0.12);
+  --green: #00FF87;
+  --green-dim: rgba(0,255,135,0.1);
+  --white: #F0EDE8;
+  --dim: rgba(240,237,232,0.45);
+  --dimmer: rgba(240,237,232,0.2);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'EB Garamond', serif; overflow-x: hidden; cursor: none; }
+.cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s; }
+.cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(200,169,110,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s; }
+
+/* TICKER */
+.ticker { position: fixed; top: 0; left: 0; right: 0; height: 26px; background: var(--dark); border-bottom: 1px solid var(--border); display: flex; align-items: center; overflow: hidden; z-index: 100; }
+.ticker-inner { display: flex; gap: 4rem; animation: tick 35s linear infinite; white-space: nowrap; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ticker-item { font-family: 'Syne Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem; }
+.t-lbl { color: var(--dimmer); }
+.t-up { color: var(--green); }
+
+/* NAV */
+nav { position: fixed; top: 26px; left: 0; right: 0; height: 50px; background: rgba(6,6,8,0.96); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; z-index: 99; }
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-family: 'Syne Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-status { font-family: 'Syne Mono', monospace; font-size: 0.58rem; color: var(--green); letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem; }
+.status-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blink 2s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+/* HERO */
+#hero { min-height: 100vh; padding: 116px 3rem 5rem; display: grid; grid-template-columns: 1fr 360px; gap: 4rem; align-items: center; position: relative; overflow: hidden; }
+.hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(200,169,110,0.025) 1px,transparent 1px), linear-gradient(90deg, rgba(200,169,110,0.025) 1px,transparent 1px); background-size: 40px 40px; }
+.hero-left { position: relative; z-index: 2; }
+.hero-eyebrow { font-family: 'Syne Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; opacity:0; animation: up 0.8s ease 0.2s forwards; }
+.eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+.hero-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3.5rem,7vw,7.5rem); line-height: 0.92; text-transform: uppercase; letter-spacing: -0.02em; opacity:0; animation: up 0.8s ease 0.4s forwards; }
+.hero-name .outline { -webkit-text-stroke: 1px var(--gold); color: transparent; }
+.hero-role { margin-top: 2.5rem; font-size: 1.15rem; font-style: italic; color: var(--dim); line-height: 1.65; max-width: 540px; opacity:0; animation: up 0.8s ease 0.6s forwards; }
+.hero-cta { margin-top: 3rem; display: flex; gap: 1rem; opacity:0; animation: up 0.8s ease 0.8s forwards; }
+.btn-p { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.85rem 2rem; background: var(--gold); color: var(--black); text-decoration: none; font-weight: 700; transition: background 0.2s; }
+.btn-p:hover { background: var(--white); }
+.btn-o { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.85rem 2rem; border: 1px solid var(--border); color: var(--dim); text-decoration: none; transition: all 0.2s; }
+.btn-o:hover { border-color: var(--gold); color: var(--gold); }
+@keyframes up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* HERO PANEL */
+.hero-panel { background: var(--panel); border: 1px solid var(--border); opacity:0; animation: up 0.8s ease 1s forwards; }
+.ph { padding: 0.7rem 1.2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.ph-title { font-family: 'Syne Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.dots { display: flex; gap: 0.35rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.pb { padding: 1.25rem; }
+.mrow { display: flex; justify-content: space-between; align-items: baseline; padding: 0.55rem 0; border-bottom: 1px solid var(--border); }
+.mrow:last-of-type { border: none; }
+.mlbl { font-family: 'Syne Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; color: var(--dimmer); text-transform: uppercase; }
+.mval { font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; }
+.mval.g { color: var(--green); }
+.mval.gold { color: var(--gold); }
+.codeblock { margin-top: 1.2rem; background: var(--black); padding: 0.9rem; font-family: 'Syne Mono', monospace; font-size: 0.62rem; line-height: 1.9; color: var(--dim); border-left: 2px solid var(--gold); }
+.cc { color: rgba(200,169,110,0.35); }
+.ck { color: var(--gold); }
+.cs { color: var(--green); }
+.cf { color: #7EB8F7; }
+
+/* SKILLS - BUILT BY */
+#skills { padding: 5rem 3rem; border-top: 1px solid var(--border); }
+.built-grid { margin-top: 3.5rem; display: flex; flex-direction: column; }
+.built-row { display: grid; grid-template-columns: 220px 1fr; align-items: center; gap: 3rem; padding: 1.1rem 0; border-bottom: 1px solid var(--border); transition: background 0.2s; }
+.built-row:hover { background: var(--panel); padding-left: 1rem; margin: 0 -1rem; padding-right: 1rem; }
+.built-skill { display: flex; flex-direction: column; gap: 0.25rem; }
+.bs-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
+.bs-years { font-family: 'Syne Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+.built-proof { display: flex; align-items: center; gap: 1.5rem; }
+.bp-label { font-family: 'Syne Mono', monospace; font-size: 0.55rem; letter-spacing: 0.12em; color: var(--dimmer); text-transform: uppercase; white-space: nowrap; }
+.bp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.bp-tag { font-family: 'Syne Mono', monospace; font-size: 0.55rem; padding: 0.2rem 0.6rem; border: 1px solid var(--border); color: var(--dim); letter-spacing: 0.06em; transition: all 0.2s; }
+.built-row:hover .bp-tag { border-color: rgba(200,169,110,0.3); color: var(--gold); }
+
+/* SECTION HEADER */
+.sec-eye { font-family: 'Syne Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.sec-eye::after { content:''; flex:1; height:1px; background:var(--border); }
+.sec-h { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem,5vw,5rem); text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.95; }
+.sec-h span { color: var(--gold); }
+
+/* DOMAIN GROUPS */
+.domain-group { margin-top: 3rem; }
+.dg-header { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--gold); margin-bottom: 0; }
+.dg-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--gold); letter-spacing: 0.05em; }
+.dg-count { font-family: 'Syne Mono', monospace; font-size: 0.58rem; color: var(--dimmer); letter-spacing: 0.15em; text-transform: uppercase; }
+.proj-row.featured { background: rgba(200,169,110,0.04); border-left: 2px solid var(--gold); padding-left: 1rem; }
+.proj-row.featured:hover { background: rgba(200,169,110,0.08); }
+.proj-badge { font-family: 'Syne Mono', monospace; font-size: 0.5rem; padding: 0.15rem 0.45rem; background: rgba(200,169,110,0.1); color: var(--gold); border: 1px solid rgba(200,169,110,0.3); letter-spacing: 0.1em; margin-left: 0.5rem; vertical-align: middle; animation: blink 2s ease infinite; }
+.stag.gold { border-color: rgba(200,169,110,0.4); color: var(--gold); }
+/* PROJECTS */
+#projects { padding: 5rem 3rem; border-top: 1px solid var(--border); }
+.proj-list { margin-top: 3.5rem; }
+.proj-row { display: grid; grid-template-columns: 70px 1fr 220px 120px; align-items: center; padding: 1.6rem 0; border-bottom: 1px solid var(--border); gap: 2rem; text-decoration: none; color: inherit; transition: all 0.25s; }
+.proj-row:hover { background: var(--panel); padding: 1.6rem 1.2rem; margin: 0 -1.2rem; }
+.proj-idx { font-family: 'Syne Mono', monospace; font-size: 0.62rem; color: var(--dimmer); }
+.proj-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+.proj-sum { font-size: 0.9rem; font-style: italic; color: var(--dim); line-height: 1.4; }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: flex-end; }
+.stag { font-family: 'Syne Mono', monospace; font-size: 0.52rem; letter-spacing: 0.07em; padding: 0.18rem 0.45rem; border: 1px solid var(--border); color: var(--dimmer); text-transform: uppercase; }
+.proj-arrow { font-family: 'Syne Mono', monospace; font-size: 0.62rem; color: var(--gold); text-align: right; opacity: 0; transition: opacity 0.2s; }
+.proj-row:hover .proj-arrow { opacity: 1; }
+
+/* PROOF */
+#proof { padding: 5rem 3rem; border-top: 1px solid var(--border); background: var(--dark); }
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 3.5rem; }
+.proof-card { background: var(--dark); padding: 2.5rem; position: relative; overflow: hidden; }
+.proof-card::before { content:''; position: absolute; top:0; left:0; width: 3px; height: 0; background: var(--gold); transition: height 0.4s ease; }
+.proof-card.gc::before { background: var(--green); }
+.proof-card:hover::before { height: 100%; }
+.pnum { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: rgba(200,169,110,0.06); position: absolute; top: 0.5rem; right: 1.2rem; line-height: 1; letter-spacing: -0.05em; }
+.plbl { font-family: 'Syne Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.85rem; }
+.plbl.green { color: var(--green); }
+.ptitle { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--white); margin-bottom: 0.85rem; line-height: 1.2; }
+.pdesc { font-size: 0.92rem; font-style: italic; color: var(--dim); line-height: 1.7; margin-bottom: 1.25rem; }
+.pmethods { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.mtag { font-family: 'Syne Mono', monospace; font-size: 0.52rem; padding: 0.2rem 0.55rem; background: var(--gold-dim); color: var(--gold); letter-spacing: 0.07em; text-transform: uppercase; }
+.mtag.green { background: var(--green-dim); color: var(--green); }
+
+/* SIGNAL */
+#signal { padding: 5rem 3rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.sig-stmt { font-size: 1.55rem; font-style: italic; line-height: 1.5; color: var(--white); margin-bottom: 2rem; }
+.sig-stmt strong { font-style: normal; color: var(--gold); font-weight: 500; }
+.sig-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+.sig-list li { display: flex; gap: 1rem; font-size: 0.93rem; font-style: italic; color: var(--dim); line-height: 1.5; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+.sig-list li::before { content: '→'; font-family: 'Syne Mono', monospace; color: var(--gold); font-style: normal; flex-shrink: 0; }
+.terminal { background: var(--black); border: 1px solid var(--border); font-family: 'Syne Mono', monospace; font-size: 0.67rem; line-height: 2; color: var(--dim); }
+.term-hdr { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+.term-body { padding: 1.5rem; }
+.tp { color: var(--green); }
+.tpath { color: #7EB8F7; }
+.tcmd { color: var(--white); }
+.tout { color: var(--dimmer); padding-left: 1rem; }
+.tg { color: var(--green); }
+.tgold { color: var(--gold); }
+.tcursor { display: inline-block; width: 7px; height: 13px; background: var(--green); vertical-align: middle; animation: blink 1s step-end infinite; }
+
+/* CONTACT */
+#contact { padding: 7rem 3rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.c-heading { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem,6vw,6rem); text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.9; }
+.c-heading span { -webkit-text-stroke: 1px var(--gold); color: transparent; }
+.c-sub { margin-top: 1.75rem; font-size: 1.05rem; font-style: italic; color: var(--dim); line-height: 1.6; }
+.c-right { display: flex; flex-direction: column; gap: 0.75rem; }
+.c-item { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.4rem; border: 1px solid var(--border); text-decoration: none; color: var(--white); transition: all 0.2s; }
+.c-item:hover { border-color: var(--gold); background: var(--gold-dim); }
+.c-lbl { font-family: 'Syne Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dimmer); }
+.c-val { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; }
+.c-arr { font-family: 'Syne Mono', monospace; font-size: 0.65rem; color: var(--gold); }
+
+footer { padding: 1.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-family: 'Syne Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; color: var(--dimmer); }
+
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr} .hero-panel{display:none}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  #signal,#contact{grid-template-columns:1fr;gap:3rem}
+  .proof-grid{grid-template-columns:1fr}
+  .proj-row{grid-template-columns:50px 1fr}
+  .proj-stack,.proj-arrow{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="t-lbl">SKILLS</span><span class="t-up">Python · R · SQL · PostgreSQL · Docker · Kubernetes · Stan · scikit-learn · tidymodels</span></span>
+    <span class="ticker-item"><span class="t-lbl">RESEARCH</span><span class="t-up">Frontier Market Regime Classification · Live Baku Node · HMM · Bayesian Inference · Survival Analysis</span></span>
+    <span class="ticker-item"><span class="t-lbl">STATUS</span><span class="t-up">Open to Quant / Senior DS Roles · MSc Financial Engineering · WorldQuant University · April 2026</span></span>
+    <span class="ticker-item"><span class="t-lbl">LOCATION</span><span class="t-up">Nairobi, Kenya · Open to Remote · Frontier Markets Specialist</span></span>
+    <span class="ticker-item"><span class="t-lbl">SKILLS</span><span class="t-up">Python · R · SQL · PostgreSQL · Docker · Kubernetes · Stan · scikit-learn · tidymodels</span></span>
+    <span class="ticker-item"><span class="t-lbl">RESEARCH</span><span class="t-up">Frontier Market Regime Classification · Live Baku Node · HMM · Bayesian Inference · Survival Analysis</span></span>
+    <span class="ticker-item"><span class="t-lbl">STATUS</span><span class="t-up">Open to Quant / Senior DS Roles · MSc Financial Engineering · WorldQuant University · April 2026</span></span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-logo">M<span>.</span>Gikonyo</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Systems</a></li>
+    <li><a href="#proof">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>Available for opportunities</div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="eyebrow-line"></div>Quantitative Data Scientist · Nairobi, Kenya</div>
+    <h1 class="hero-name">Moses<br><span class="outline">Martin</span><br>Gikonyo</h1>
+    <p class="hero-role">I build production-grade intelligence systems at the intersection of machine learning, quantitative finance, and frontier market research. Not proofs of concept — deployable infrastructure that runs.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-p">View Systems</a>
+      <a href="https://github.com/witttingtorch" class="btn-o" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <div class="ph">
+      <span class="ph-title">profile.json</span>
+      <div class="dots">
+        <div class="dot" style="background:#FF5F56"></div>
+        <div class="dot" style="background:#FFBD2E"></div>
+        <div class="dot" style="background:#27C93F"></div>
+      </div>
+    </div>
+    <div class="pb">
+      <div class="mrow"><span class="mlbl">Role</span><span class="mval gold">Quant DS</span></div>
+      <div class="mrow"><span class="mlbl">Prod Systems</span><span class="mval g">6 Deployed</span></div>
+      <div class="mrow"><span class="mlbl">Research Node</span><span class="mval g">Baku · Live</span></div>
+      <div class="mrow"><span class="mlbl">GitHub Repos</span><span class="mval">38</span></div>
+      <div class="mrow"><span class="mlbl">MSc Start</span><span class="mval gold">Apr 2026</span></div>
+      <div class="mrow"><span class="mlbl">Location</span><span class="mval">Nairobi 🇰🇪</span></div>
+      <div class="codeblock">
+        <div><span class="cc"># Philosophy</span></div>
+        <div><span class="ck">def </span><span class="cf">build</span>():</div>
+        <div>&nbsp;&nbsp;<span class="ck">return </span>{</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cs">"grade"</span>: <span class="cs">"production"</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cs">"standard"</span>: <span class="cs">"institutional"</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cs">"market"</span>: <span class="cs">"frontier"</span></div>
+        <div>&nbsp;&nbsp;}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-eye">Technical Depth</div>
+  <h2 class="sec-h">Skills by<br><span>What I Built</span></h2>
+
+  <div class="built-grid">
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">Python</span>
+        <span class="bs-years">5 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Churn Analytics SaaS</span>
+          <span class="bp-tag">Bayesian Geo-Lift</span>
+          <span class="bp-tag">CLV Platform</span>
+          <span class="bp-tag">A/B Framework</span>
+          <span class="bp-tag">Observability One</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">R</span>
+        <span class="bs-years">4 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Funnel Growth Platform</span>
+          <span class="bp-tag">CLV Platform</span>
+          <span class="bp-tag">datascienceMartin Blog</span>
+          <span class="bp-tag">Survival Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">SQL / PostgreSQL</span>
+        <span class="bs-years">5 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Churn Analytics SaaS</span>
+          <span class="bp-tag">CLV Platform</span>
+          <span class="bp-tag">Funnel Growth Platform</span>
+          <span class="bp-tag">A/B Framework</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">Bayesian Inference</span>
+        <span class="bs-years">3 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Bayesian Geo-Lift</span>
+          <span class="bp-tag">Regime Classification Framework</span>
+          <span class="bp-tag">Uncertainty Quantification</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">Hidden Markov Models</span>
+        <span class="bs-years">2 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Frontier Market Regime Framework</span>
+          <span class="bp-tag">Live Baku Node</span>
+          <span class="bp-tag">Regime Signal Transmission</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">Causal Inference</span>
+        <span class="bs-years">3 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Bayesian Geo-Lift</span>
+          <span class="bp-tag">A/B Experimentation Framework</span>
+          <span class="bp-tag">Marketing Incrementality</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">Docker / Kubernetes</span>
+        <span class="bs-years">3 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">CLV Platform</span>
+          <span class="bp-tag">Funnel Growth Platform</span>
+          <span class="bp-tag">Churn Analytics SaaS</span>
+          <span class="bp-tag">Observability One</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">Survival Analysis</span>
+        <span class="bs-years">3 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Churn Analytics SaaS</span>
+          <span class="bp-tag">Cox PH Model</span>
+          <span class="bp-tag">Kaplan-Meier Estimator</span>
+          <span class="bp-tag">LTV Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">OpenTelemetry / RCA</span>
+        <span class="bs-years">2 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Observability One</span>
+          <span class="bp-tag">Distributed Tracing</span>
+          <span class="bp-tag">Multi-vendor Integrations</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="built-row">
+      <div class="built-skill">
+        <span class="bs-name">A/B Testing / CUPED</span>
+        <span class="bs-years">4 yrs</span>
+      </div>
+      <div class="built-proof">
+        <span class="bp-label">Used in →</span>
+        <div class="bp-tags">
+          <span class="bp-tag">Senior Experimentation Framework</span>
+          <span class="bp-tag">Variance Reduction</span>
+          <span class="bp-tag">Sequential Testing</span>
+          <span class="bp-tag">BH Correction</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-eye">Open Source · Production Grade · 38 Repositories</div>
+  <h2 class="sec-h">Deployed<br><span>Systems</span></h2>
+
+  <!-- DOMAIN: QUANT FINANCE -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">Quantitative Finance & Markets</span>
+      <span class="dg-count">3 systems</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/frontier-market-regime" target="_blank" class="proj-row featured">
+        <div class="proj-idx">★</div>
+        <div><div class="proj-name">Frontier Market Regime Classification <span class="proj-badge">LIVE</span></div><div class="proj-sum">Hybrid Human-Quantitative regime classification for frontier markets. Live nodes: Nairobi (KES) and Baku (AZN). Python pipeline, Streamlit dashboard, daily logging.</div></div>
+        <div class="proj-stack"><span class="stag gold">HMM</span><span class="stag gold">Bayesian</span><span class="stag gold">Streamlit</span><span class="stag gold">Live</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/algorithmic-trading-system" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Algorithmic Trading System</div><div class="proj-sum">Institutional-style quant research framework — alpha factor research, strategy backtesting, and walk-forward validation</div></div>
+        <div class="proj-stack"><span class="stag">Python</span><span class="stag">Alpha Factors</span><span class="stag">Backtesting</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/blackscholes-engine" target="_blank" class="proj-row">
+        <div class="proj-idx">02 /</div>
+        <div><div class="proj-name">Black-Scholes Engine</div><div class="proj-sum">Modular Python pricing engine — numerical methods, Monte Carlo simulation, stochastic modelling, performance benchmarking, statistical validation</div></div>
+        <div class="proj-stack"><span class="stag">Monte Carlo</span><span class="stag">Stochastic</span><span class="stag">Jupyter</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOMAIN: ML INFRASTRUCTURE -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">ML Infrastructure & Feature Engineering</span>
+      <span class="dg-count">3 systems</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/production-feature-store" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Production Feature Store</div><div class="proj-sum">Point-in-time correctness, freshness SLAs, training–serving skew detection — ML infrastructure built to production standards</div></div>
+        <div class="proj-stack"><span class="stag">ML Infra</span><span class="stag">Feature Store</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/feed-ranking-system" target="_blank" class="proj-row">
+        <div class="proj-idx">02 /</div>
+        <div><div class="proj-name">Feed Ranking System</div><div class="proj-sum">Production-style feed ranking — recall pipeline, GBDT ranking, multi-objective re-ranking, counterfactual evaluation with IPS/SNIPS, end-to-end inference under latency</div></div>
+        <div class="proj-stack"><span class="stag">GBDT</span><span class="stag">IPS/SNIPS</span><span class="stag">Ranking</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/nlp-intelligence-platform" target="_blank" class="proj-row">
+        <div class="proj-idx">03 /</div>
+        <div><div class="proj-name">NLP Intelligence Platform</div><div class="proj-sum">Production-grade NLP platform — model training, inference, monitoring, privacy compliance, and streaming architecture</div></div>
+        <div class="proj-stack"><span class="stag">NLP</span><span class="stag">Inference</span><span class="stag">Streaming</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOMAIN: DATA ENGINEERING -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">Data Engineering & Cloud Infrastructure</span>
+      <span class="dg-count">3 systems</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/cloud-analytics-platform" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Cloud Analytics Platform</div><div class="proj-sum">Reference architecture for production-scale cloud data & ML platforms — AWS + GCP, Airflow, dbt, Kafka, ML pipelines</div></div>
+        <div class="proj-stack"><span class="stag">AWS</span><span class="stag">GCP</span><span class="stag">Kafka</span><span class="stag">dbt</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/smart-farm-analytics-platform" target="_blank" class="proj-row">
+        <div class="proj-idx">02 /</div>
+        <div><div class="proj-name">Smart Farm Analytics Platform</div><div class="proj-sum">Modern analytics for smart farming — dbt, multi-warehouse ingestion (Postgres, Snowflake, BigQuery), SCD Type 2 dimensions, time-series KPI engineering</div></div>
+        <div class="proj-stack"><span class="stag">dbt</span><span class="stag">Snowflake</span><span class="stag">BigQuery</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/cloud-payments-fraud-analytics-platform" target="_blank" class="proj-row">
+        <div class="proj-idx">03 /</div>
+        <div><div class="proj-name">Cloud Payments Fraud Analytics</div><div class="proj-sum">Large-scale real-time payments fraud and risk platform — streaming ML inference, Kafka, compliance-first system design</div></div>
+        <div class="proj-stack"><span class="stag">Kafka</span><span class="stag">Streaming</span><span class="stag">Fraud ML</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOMAIN: ANALYTICS & EXPERIMENTATION -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">Product Analytics & Experimentation</span>
+      <span class="dg-count">5 systems</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/ab-testing-senior-experimentation" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Senior A/B Experimentation Framework</div><div class="proj-sum">CUPED variance reduction, sequential testing, Bonferroni & BH correction — built to institutional experimentation standards</div></div>
+        <div class="proj-stack"><span class="stag">CUPED</span><span class="stag">Sequential</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/subscription-style-experimentation" target="_blank" class="proj-row">
+        <div class="proj-idx">02 /</div>
+        <div><div class="proj-name">Subscription-Style Experimentation</div><div class="proj-sum">Bayesian inference, retention modelling, and experimentation framework for subscription product analytics</div></div>
+        <div class="proj-stack"><span class="stag">Bayesian</span><span class="stag">Retention</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/churn-analytics-saas" target="_blank" class="proj-row">
+        <div class="proj-idx">03 /</div>
+        <div><div class="proj-name">Churn Analytics SaaS</div><div class="proj-sum">PostgreSQL-backed retention intelligence — survival analysis, Kaplan-Meier estimator, LTV modelling at production scale</div></div>
+        <div class="proj-stack"><span class="stag">Survival</span><span class="stag">PostgreSQL</span><span class="stag">LTV</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/customer-lifetime-value-platform" target="_blank" class="proj-row">
+        <div class="proj-idx">04 /</div>
+        <div><div class="proj-name">Customer Lifetime Value Platform</div><div class="proj-sum">BG/NBD + Gamma-Gamma CLV engine — SQL, Python, R, Docker, Kubernetes — enterprise-scale deployment</div></div>
+        <div class="proj-stack"><span class="stag">BG/NBD</span><span class="stag">Docker</span><span class="stag">K8s</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/funnel-growth-analytics-platform" target="_blank" class="proj-row">
+        <div class="proj-idx">05 /</div>
+        <div><div class="proj-name">Funnel & Growth Analytics Platform</div><div class="proj-sum">FAANG-style AARRR funnel analytics — PostgreSQL + Kubernetes stack, cohort analysis, drop-off intelligence</div></div>
+        <div class="proj-stack"><span class="stag">R</span><span class="stag">AARRR</span><span class="stag">K8s</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOMAIN: CAUSAL INFERENCE -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">Causal Inference & Bayesian Methods</span>
+      <span class="dg-count">1 system</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/bayesian-incrementality-geo-lift" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Bayesian Incrementality & Geo-Lift</div><div class="proj-sum">Causal inference for true marketing incrementality — geographic treatment/control units, posterior uncertainty quantification, separating signal from platform-reported noise</div></div>
+        <div class="proj-stack"><span class="stag">Bayesian</span><span class="stag">Causal</span><span class="stag">Geo-Lift</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOMAIN: RECOMMENDER & EVALUATION -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">Recommender Systems & Evaluation</span>
+      <span class="dg-count">1 system</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/recommender-evaluation-framework" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Recommender Evaluation Framework</div><div class="proj-sum">Production-grade recommender evaluation focused on metrics, bias detection, and decision safety at scale</div></div>
+        <div class="proj-stack"><span class="stag">RecSys</span><span class="stag">Bias</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOMAIN: INFRASTRUCTURE & RELIABILITY -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">Infrastructure, Reliability & Observability</span>
+      <span class="dg-count">2 systems</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/observability-one" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Observability One</div><div class="proj-sum">Enterprise observability platform — RCA algorithms, OpenTelemetry integration, multi-vendor distributed tracing</div></div>
+        <div class="proj-stack"><span class="stag">OTel</span><span class="stag">RCA</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/infra-metrics-reliability-platform" target="_blank" class="proj-row">
+        <div class="proj-idx">02 /</div>
+        <div><div class="proj-name">Infra Metrics Reliability Platform</div><div class="proj-sum">Batch-first infrastructure reliability analytics — SLOs, error budgets, and change impact analysis</div></div>
+        <div class="proj-stack"><span class="stag">SLOs</span><span class="stag">Error Budgets</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOMAIN: DOMAIN ANALYTICS -->
+  <div class="domain-group">
+    <div class="dg-header">
+      <span class="dg-label">Domain-Specific Analytics</span>
+      <span class="dg-count">3 systems</span>
+    </div>
+    <div class="proj-list">
+      <a href="https://github.com/witttingtorch/healthcare-operations-analytics-consulting" target="_blank" class="proj-row">
+        <div class="proj-idx">01 /</div>
+        <div><div class="proj-name">Healthcare Operations Analytics</div><div class="proj-sum">Consulting-style healthcare analytics — SQL KPIs, ETL pipelines, dashboards, and Agile documentation</div></div>
+        <div class="proj-stack"><span class="stag">SQL</span><span class="stag">ETL</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/global-salary-grouping-insights" target="_blank" class="proj-row">
+        <div class="proj-idx">02 /</div>
+        <div><div class="proj-name">Global Salary Grouping Insights</div><div class="proj-sum">Production-grade analytics for grouping countries into fair global salary tiers using purchasing-power–adjusted compensation data</div></div>
+        <div class="proj-stack"><span class="stag">PPP</span><span class="stag">Clustering</span><span class="stag">Python</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+      <a href="https://github.com/witttingtorch/PCEA-Githunguri-Presbytery-Youth-Summit-Registration-Pipeline" target="_blank" class="proj-row">
+        <div class="proj-idx">03 /</div>
+        <div><div class="proj-name">PCEA Youth Summit Registration Pipeline <span class="proj-badge" style="background:rgba(0,255,135,0.1);color:var(--green);border-color:rgba(0,255,135,0.3)">Pro Bono</span></div><div class="proj-sum">Automated registration pipeline for 1000+ youth delegates — reduced check-in processing from hours to minutes</div></div>
+        <div class="proj-stack"><span class="stag">Python</span><span class="stag">Automation</span><span class="stag">Pipeline</span></div>
+        <div class="proj-arrow">View →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="proj-footer">
+    <a href="https://github.com/witttingtorch?tab=repositories" target="_blank" class="btn-o" style="display:inline-flex;align-items:center;gap:0.75rem;">
+      View All 38 Repositories on GitHub ↗
+    </a>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="sec-eye">Current Research</div>
+  <h2 class="sec-h">Proof of<br><span>Work</span></h2>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="pnum">01</div>
+      <div class="plbl">Flagship Research</div>
+      <div class="ptitle">Frontier Market Regime Classification Framework</div>
+      <div class="pdesc">A live, production-grade system classifying macroeconomic and market regimes across frontier markets using Hidden Markov Models. A live operational node runs in Baku. This is quantitative research in markets that institutional players ignore — where the edge is real and the signal is not competed away.</div>
+      <div class="pmethods"><span class="mtag">Hidden Markov Models</span><span class="mtag">Bayesian Inference</span><span class="mtag">Time Series FE</span><span class="mtag">Live Baku Node</span><span class="mtag">Frontier Markets</span></div>
+    </div>
+    <div class="proof-card gc">
+      <div class="pnum">02</div>
+      <div class="plbl green">Causal Inference at Scale</div>
+      <div class="ptitle">Bayesian Geo-Lift for Marketing Incrementality</div>
+      <div class="pdesc">Most marketing attribution is wrong. This framework uses geographic regions as natural experiments — Bayesian posterior inference quantifies true incremental impact. The methodology used by the world's most sophisticated advertisers, built from scratch with full uncertainty quantification.</div>
+      <div class="pmethods"><span class="mtag green">Geo Experiments</span><span class="mtag green">Posterior Inference</span><span class="mtag green">Causal Graphs</span><span class="mtag green">Uncertainty Quantification</span></div>
+    </div>
+    <div class="proof-card gc">
+      <div class="pnum">03</div>
+      <div class="plbl green">Survival Analysis</div>
+      <div class="ptitle">Time-to-Churn Modelling Beyond Binary Classification</div>
+      <div class="pdesc">Churn is not a binary outcome — it is a time-dependent process. This system models the hazard function directly using Cox proportional hazards and Kaplan-Meier estimators, giving product teams time-to-event intelligence that binary classifiers fundamentally cannot provide.</div>
+      <div class="pmethods"><span class="mtag green">Cox PH Model</span><span class="mtag green">Kaplan-Meier</span><span class="mtag green">Hazard Functions</span><span class="mtag green">LTV Integration</span></div>
+    </div>
+    <div class="proof-card">
+      <div class="pnum">04</div>
+      <div class="plbl">Experimentation Science</div>
+      <div class="ptitle">CUPED Variance Reduction & Sequential Testing</div>
+      <div class="pdesc">CUPED reduces experiment variance without inflating Type I error — enabling faster, more reliable product decisions. Combined with sequential testing and Benjamini-Hochberg correction, this is the experimentation infrastructure that top tech firms run. Built to the same standard.</div>
+      <div class="pmethods"><span class="mtag">CUPED</span><span class="mtag">Sequential Testing</span><span class="mtag">BH Correction</span><span class="mtag">Power Analysis</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="signal">
+  <div>
+    <div class="sec-eye">The Case</div>
+    <div class="sig-stmt">I don't build demos.<br>I build <strong>systems that run</strong><br>in production.</div>
+    <ul class="sig-list">
+      <li>Every project is production-grade — containerised, tested, deployable to real infrastructure today.</li>
+      <li>I operate in frontier markets where data is sparse, noise is high, and the quantitative edge is real — not competed away.</li>
+      <li>My research applies institutional-grade methods — HMM, Bayesian inference, survival analysis — to commercially significant problems.</li>
+      <li>I build in public. Every line of code is reviewable on GitHub. No black boxes, no vaporware.</li>
+      <li>MSc Financial Engineering at WorldQuant University from April 2026 — building the formal theoretical foundation behind the applied work.</li>
+    </ul>
+  </div>
+  <div class="terminal">
+    <div class="term-hdr">
+      <div class="dots">
+        <div class="dot" style="background:#FF5F56"></div>
+        <div class="dot" style="background:#FFBD2E"></div>
+        <div class="dot" style="background:#27C93F"></div>
+      </div>
+      <span style="font-family:'Syne Mono',monospace;font-size:0.58rem;color:var(--dimmer);margin-left:0.5rem">bash · witttingtorch</span>
+    </div>
+    <div class="term-body">
+      <div><span class="tp">→</span> <span class="tpath">~/regime-framework</span> <span class="tcmd">python run_baku_node.py</span></div>
+      <div class="tout">[INFO] Connecting to data pipeline...</div>
+      <div class="tout"><span class="tg">[OK]</span> Baku node online</div>
+      <div class="tout">[INFO] Running HMM regime detection...</div>
+      <div class="tout"><span class="tgold">[RESULT]</span> Current regime: RISK-OFF</div>
+      <div class="tout"><span class="tgold">[RESULT]</span> Confidence: 0.847</div>
+      <div class="tout"><span class="tg">[OK]</span> Signal transmitted</div>
+      <br>
+      <div><span class="tp">→</span> <span class="tpath">~/clv-platform</span> <span class="tcmd">docker-compose up -d</span></div>
+      <div class="tout"><span class="tg">[OK]</span> PostgreSQL · port 5432</div>
+      <div class="tout"><span class="tg">[OK]</span> API service · port 8000</div>
+      <div class="tout"><span class="tg">[OK]</span> All systems operational</div>
+      <br>
+      <div><span class="tp">→</span> <span class="tpath">~</span> <span class="tcursor"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div>
+    <div class="sec-eye">Get in Touch</div>
+    <h2 class="c-heading">Let's<br><span>Work</span><br>Together</h2>
+    <p class="c-sub">Open to quantitative research roles, senior data science positions, and frontier market collaborations. Remote-first.</p>
+  </div>
+  <div class="c-right">
+    <a href="https://github.com/witttingtorch" target="_blank" class="c-item">
+      <div><div class="c-lbl">Code</div><div class="c-val">github.com/witttingtorch</div></div>
+      <div class="c-arr">↗</div>
+    </a>
+    <a href="https://www.linkedin.com/in/moses-martin-njuguna-gikonyo-b28519192/" target="_blank" class="c-item">
+      <div><div class="c-lbl">LinkedIn</div><div class="c-val">Moses Martin Njuguna Gikonyo</div></div>
+      <div class="c-arr">↗</div>
+    </a>
+    <a href="https://witttingtorch.github.io/datasciencewebsite" target="_blank" class="c-item">
+      <div><div class="c-lbl">Blog & Research</div><div class="c-val">datascienceMartin</div></div>
+      <div class="c-arr">↗</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Moses Martin Njuguna Gikonyo · Nairobi, Kenya</span>
+  <span>Built in public · witttingtorch</span>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+(function anim(){
+  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(anim);
+})();
+
+// Cursor expand
+document.querySelectorAll('a,.proj-row,.c-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='18px';cursor.style.height='18px';ring.style.width='55px';ring.style.height='55px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='8px';cursor.style.height='8px';ring.style.width='32px';ring.style.height='32px';});
+});
+</script>
+</body>
+</html>
