@@ -2174,360 +2174,68 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
   </style>
-  <style type="text/css">/* ============================================================
-     MARTIN GIKONYO — ELITE DISTILL THEME
-     Navy + Gold · Dark/Light Mode · Citadel-grade
-     ============================================================ */
+  <style type="text/css">@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
-
-  /* ── DARK MODE (default) ── */
   :root {
-    --bg:       #060608;
-    --bg2:      #0C0D10;
-    --panel:    #111318;
-    --border:   rgba(255,255,255,0.07);
-    --gold:     #C8A96E;
-    --gold-dim: rgba(200,169,110,0.12);
-    --white:    #F0EDE8;
-    --dim:      rgba(240,237,232,0.5);
-    --dimmer:   rgba(240,237,232,0.25);
-    --nav-bg:   rgba(6,6,8,0.97);
-    --code-bg:  #0C0D10;
-    --shadow:   rgba(0,0,0,0.5);
+    --bg: #060608; --bg2: #0C0D10; --panel: #111318;
+    --border: rgba(255,255,255,0.07); --gold: #C8A96E;
+    --gold-dim: rgba(200,169,110,0.12); --white: #F0EDE8;
+    --dim: rgba(240,237,232,0.5); --dimmer: rgba(240,237,232,0.25);
+    --nav-bg: rgba(6,6,8,0.97); --code-bg: #0C0D10;
   }
 
-  /* ── LIGHT MODE ── */
   [data-theme="light"] {
-    --bg:       #FAF7F2;
-    --bg2:      #F2EDE4;
-    --panel:    #FFFFFF;
-    --border:   rgba(0,0,0,0.08);
-    --gold:     #A07840;
-    --gold-dim: rgba(160,120,64,0.1);
-    --white:    #1A1208;
-    --dim:      rgba(26,18,8,0.6);
-    --dimmer:   rgba(26,18,8,0.35);
-    --nav-bg:   rgba(250,247,242,0.97);
-    --code-bg:  #F2EDE4;
-    --shadow:   rgba(0,0,0,0.08);
+    --bg: #FAF7F2; --bg2: #F2EDE4; --panel: #FFFFFF;
+    --border: rgba(0,0,0,0.08); --gold: #A07840;
+    --gold-dim: rgba(160,120,64,0.1); --white: #1A1208;
+    --dim: rgba(26,18,8,0.6); --dimmer: rgba(26,18,8,0.35);
+    --nav-bg: rgba(250,247,242,0.97); --code-bg: #F2EDE4;
   }
 
-  /* ── BASE ── */
-  html, body {
-    background: var(--bg) !important;
-    color: var(--white) !important;
-    font-family: 'EB Garamond', Georgia, serif !important;
-    font-size: 18px !important;
-    line-height: 1.75 !important;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
+  html, body { background: var(--bg) !important; color: var(--white) !important; font-family: 'EB Garamond', Georgia, serif !important; font-size: 18px !important; line-height: 1.75 !important; transition: background 0.3s ease, color 0.3s ease; }
 
-  /* ── NAVBAR ── */
-  .distill-site-nav {
-    background: var(--nav-bg) !important;
-    border-bottom: 1px solid var(--border) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    box-shadow: none !important;
-    padding: 0 2rem !important;
-    height: 56px !important;
-    display: flex !important;
-    align-items: center !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 999 !important;
-  }
+  .distill-site-nav { background: var(--nav-bg) !important; border-bottom: 1px solid var(--border) !important; backdrop-filter: blur(20px) !important; box-shadow: none !important; padding: 0 2rem !important; height: 56px !important; position: sticky !important; top: 0 !important; z-index: 999 !important; }
+  .distill-site-nav .title { font-family: 'Syne', sans-serif !important; font-weight: 800 !important; font-size: 0.85rem !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--white) !important; text-decoration: none !important; }
+  .distill-site-nav a { font-family: 'Syne Mono', monospace !important; font-size: 0.62rem !important; letter-spacing: 0.15em !important; text-transform: uppercase !important; color: var(--dim) !important; text-decoration: none !important; padding: 0.4rem 0.9rem !important; transition: color 0.2s !important; }
+  .distill-site-nav a:hover { color: var(--gold) !important; background: none !important; }
 
-  .distill-site-nav .nav-left,
-  .distill-site-nav .nav-right {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.25rem !important;
-  }
+  .theme-toggle { position: fixed; top: 14px; right: 1.5rem; z-index: 1000; background: var(--panel); border: 1px solid var(--border); color: var(--dim); font-family: 'Syne Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; padding: 0.35rem 0.75rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+  .theme-toggle:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* Site title */
-  .distill-site-nav .title {
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 800 !important;
-    font-size: 0.85rem !important;
-    letter-spacing: 0.12em !important;
-    text-transform: uppercase !important;
-    color: var(--white) !important;
-    text-decoration: none !important;
-  }
+  .d-article, d-article { background: var(--bg) !important; color: var(--white) !important; max-width: 740px !important; margin: 0 auto !important; padding: 4rem 2rem 6rem !important; }
 
-  /* Nav links */
-  .distill-site-nav a {
-    font-family: 'Syne Mono', monospace !important;
-    font-size: 0.62rem !important;
-    letter-spacing: 0.15em !important;
-    text-transform: uppercase !important;
-    color: var(--dim) !important;
-    text-decoration: none !important;
-    padding: 0.4rem 0.9rem !important;
-    transition: color 0.2s !important;
-    border: none !important;
-  }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif !important; font-weight: 700 !important; color: var(--white) !important; line-height: 1.15 !important; }
+  h1 { font-size: 2.8rem !important; font-weight: 800 !important; letter-spacing: -0.03em !important; border-bottom: 1px solid var(--border) !important; padding-bottom: 1rem !important; }
+  h2 { font-size: 1.6rem !important; color: var(--gold) !important; }
+  h3 { font-size: 1.2rem !important; color: var(--dim) !important; }
 
-  .distill-site-nav a:hover {
-    color: var(--gold) !important;
-    background: none !important;
-  }
+  p, d-article p { color: var(--dim) !important; font-size: 1.05rem !important; line-height: 1.85 !important; }
+  a, d-article a { color: var(--gold) !important; text-decoration: none !important; border-bottom: 1px solid var(--gold-dim) !important; transition: border-color 0.2s !important; }
+  a:hover { border-bottom-color: var(--gold) !important; }
 
-  /* Active nav link */
-  .distill-site-nav a.active {
-    color: var(--gold) !important;
-    border-bottom: 2px solid var(--gold) !important;
-  }
+  pre, code { font-family: 'Syne Mono', monospace !important; font-size: 0.85rem !important; background: var(--code-bg) !important; color: var(--gold) !important; border: 1px solid var(--border) !important; border-radius: 0 !important; }
+  pre { padding: 1.5rem !important; border-left: 3px solid var(--gold) !important; margin: 1.5rem 0 !important; }
+  code { padding: 0.15rem 0.4rem !important; }
 
-  /* ── THEME TOGGLE BUTTON ── */
-  .theme-toggle {
-    position: fixed;
-    top: 12px;
-    right: 1.5rem;
-    z-index: 1000;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    color: var(--dim);
-    font-family: 'Syne Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    padding: 0.35rem 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-  }
+  blockquote { border-left: 3px solid var(--gold) !important; padding: 1rem 1.5rem !important; background: var(--gold-dim) !important; font-style: italic !important; color: var(--dim) !important; }
+  hr { border: none !important; border-top: 1px solid var(--border) !important; margin: 3rem 0 !important; }
 
-  .theme-toggle:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
+  table { width: 100% !important; border-collapse: collapse !important; font-family: 'Syne Mono', monospace !important; font-size: 0.8rem !important; }
+  th { background: var(--panel) !important; color: var(--gold) !important; padding: 0.75rem 1rem !important; border-bottom: 2px solid var(--gold) !important; text-transform: uppercase !important; font-size: 0.65rem !important; letter-spacing: 0.1em !important; }
+  td { padding: 0.65rem 1rem !important; border-bottom: 1px solid var(--border) !important; color: var(--dim) !important; }
+  tr:hover td { background: var(--panel) !important; color: var(--white) !important; }
 
-  /* ── MAIN CONTENT AREA ── */
-  .d-article,
-  d-article,
-  .distill-site-body {
-    background: var(--bg) !important;
-    color: var(--white) !important;
-    max-width: 740px !important;
-    margin: 0 auto !important;
-    padding: 4rem 2rem 6rem !important;
-  }
+  .posts-list .post-preview { border-bottom: 1px solid var(--border) !important; padding: 2rem 0 !important; }
+  .posts-list .post-preview h2 { font-family: 'Syne', sans-serif !important; font-size: 1.3rem !important; color: var(--white) !important; border: none !important; padding: 0 !important; }
+  .posts-list .post-preview .description { font-style: italic !important; color: var(--dim) !important; }
+  .posts-list .post-preview .dt-published { font-family: 'Syne Mono', monospace !important; font-size: 0.6rem !important; color: var(--gold) !important; letter-spacing: 0.15em !important; text-transform: uppercase !important; }
 
-  /* ── HEADINGS ── */
-  h1, h2, h3, h4, h5, h6,
-  d-article h1, d-article h2, d-article h3 {
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 700 !important;
-    color: var(--white) !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.01em !important;
-    margin-top: 2.5rem !important;
-    margin-bottom: 1rem !important;
-  }
+  .distill-site-footer { background: var(--bg2) !important; border-top: 1px solid var(--border) !important; color: var(--dimmer) !important; font-family: 'Syne Mono', monospace !important; font-size: 0.6rem !important; text-align: center !important; padding: 1.5rem !important; }
 
-  h1, d-article h1 {
-    font-size: 2.8rem !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.03em !important;
-    border-bottom: 1px solid var(--border) !important;
-    padding-bottom: 1rem !important;
-  }
-
-  h2, d-article h2 {
-    font-size: 1.6rem !important;
-    color: var(--gold) !important;
-  }
-
-  h3, d-article h3 {
-    font-size: 1.2rem !important;
-    color: var(--dim) !important;
-    font-weight: 600 !important;
-  }
-
-  /* ── PARAGRAPHS ── */
-  p, d-article p {
-    color: var(--dim) !important;
-    font-size: 1.05rem !important;
-    line-height: 1.85 !important;
-    margin-bottom: 1.25rem !important;
-  }
-
-  /* ── LINKS ── */
-  a, d-article a {
-    color: var(--gold) !important;
-    text-decoration: none !important;
-    border-bottom: 1px solid var(--gold-dim) !important;
-    transition: border-color 0.2s !important;
-  }
-
-  a:hover, d-article a:hover {
-    border-bottom-color: var(--gold) !important;
-  }
-
-  /* ── CODE BLOCKS ── */
-  pre, code,
-  d-article pre, d-article code {
-    font-family: 'Syne Mono', 'Courier New', monospace !important;
-    font-size: 0.85rem !important;
-    background: var(--code-bg) !important;
-    color: var(--gold) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 0 !important;
-  }
-
-  pre, d-article pre {
-    padding: 1.5rem !important;
-    border-left: 3px solid var(--gold) !important;
-    overflow-x: auto !important;
-    margin: 1.5rem 0 !important;
-  }
-
-  code, d-article code {
-    padding: 0.15rem 0.4rem !important;
-    border-left: none !important;
-  }
-
-  /* ── BLOCKQUOTE ── */
-  blockquote, d-article blockquote {
-    border-left: 3px solid var(--gold) !important;
-    margin: 2rem 0 !important;
-    padding: 1rem 1.5rem !important;
-    background: var(--gold-dim) !important;
-    font-style: italic !important;
-    color: var(--dim) !important;
-  }
-
-  /* ── HORIZONTAL RULE ── */
-  hr {
-    border: none !important;
-    border-top: 1px solid var(--border) !important;
-    margin: 3rem 0 !important;
-  }
-
-  /* ── TABLES ── */
-  table, d-article table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    font-family: 'Syne Mono', monospace !important;
-    font-size: 0.8rem !important;
-    margin: 2rem 0 !important;
-  }
-
-  th {
-    background: var(--panel) !important;
-    color: var(--gold) !important;
-    font-weight: 700 !important;
-    padding: 0.75rem 1rem !important;
-    text-align: left !important;
-    border-bottom: 2px solid var(--gold) !important;
-    letter-spacing: 0.1em !important;
-    text-transform: uppercase !important;
-    font-size: 0.65rem !important;
-  }
-
-  td {
-    padding: 0.65rem 1rem !important;
-    border-bottom: 1px solid var(--border) !important;
-    color: var(--dim) !important;
-  }
-
-  tr:hover td {
-    background: var(--panel) !important;
-    color: var(--white) !important;
-  }
-
-  /* ── IMAGES ── */
-  img, d-article img {
-    max-width: 100% !important;
-    border: 1px solid var(--border) !important;
-    display: block !important;
-    margin: 2rem auto !important;
-  }
-
-  /* ── FIGURE CAPTIONS ── */
-  figcaption, .caption {
-    font-family: 'Syne Mono', monospace !important;
-    font-size: 0.65rem !important;
-    color: var(--dimmer) !important;
-    text-align: center !important;
-    letter-spacing: 0.1em !important;
-    text-transform: uppercase !important;
-    margin-top: 0.5rem !important;
-  }
-
-  /* ── BLOG LISTING ── */
-  .posts-list .post-preview {
-    border-bottom: 1px solid var(--border) !important;
-    padding: 2rem 0 !important;
-    background: transparent !important;
-  }
-
-  .posts-list .post-preview:hover {
-    background: var(--panel) !important;
-    padding-left: 1rem !important;
-    margin: 0 -1rem !important;
-    padding-right: 1rem !important;
-  }
-
-  .posts-list .post-preview h2 {
-    font-family: 'Syne', sans-serif !important;
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
-    color: var(--white) !important;
-    margin: 0 0 0.5rem 0 !important;
-    border: none !important;
-    padding: 0 !important;
-  }
-
-  .posts-list .post-preview .description {
-    font-style: italic !important;
-    color: var(--dim) !important;
-    font-size: 0.95rem !important;
-  }
-
-  .posts-list .post-preview .dt-published {
-    font-family: 'Syne Mono', monospace !important;
-    font-size: 0.6rem !important;
-    color: var(--gold) !important;
-    letter-spacing: 0.15em !important;
-    text-transform: uppercase !important;
-  }
-
-  /* ── FOOTER ── */
-  .distill-site-footer {
-    background: var(--bg2) !important;
-    border-top: 1px solid var(--border) !important;
-    color: var(--dimmer) !important;
-    font-family: 'Syne Mono', monospace !important;
-    font-size: 0.6rem !important;
-    letter-spacing: 0.1em !important;
-    text-align: center !important;
-    padding: 1.5rem !important;
-  }
-
-  /* ── PROFILE / ABOUT PAGE ── */
-  .l-page img[src*="datasciencemartin"],
-  .l-page img[src*="jpg"] {
-    border-radius: 0 !important;
-    border: 2px solid var(--gold) !important;
-    filter: grayscale(20%) !important;
-  }
-
-  /* ── SCROLLBAR ── */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--gold); }
-
-  /* ── SELECTION ── */
-  ::selection {
-    background: var(--gold-dim);
-    color: var(--gold);
-  }
-
-  /* ── TOGGLE SCRIPT INJECTION ── */
-  /* This gets injected via JS in each Rmd file or _site.yml */</style>
+  ::selection { background: var(--gold-dim); color: var(--gold); }</style>
   <style type="text/css">
   /* base style */
 
@@ -2929,6 +2637,25 @@ function init_posts_list() {
 
 
 <div class="d-article">
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀ Light</button>
+<script>
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const saved = localStorage.getItem('theme');
+const theme = saved || (prefersDark ? 'dark' : 'light');
+document.documentElement.setAttribute('data-theme', theme);
+updateBtn(theme);
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateBtn(next);
+}
+function updateBtn(theme) {
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = theme === 'dark' ? '☀ Light' : '☾ Dark';
+}
+</script>
 <h2 id="welcome-to-my-blog">Welcome to My Blog</h2>
 <p>This is where I document my work, research, and thinking across quantitative finance, machine learning, and frontier market intelligence. Posts are written for practitioners — expect rigour, code, and real-world application.</p>
 <hr />
