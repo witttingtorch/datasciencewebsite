@@ -1,0 +1,95 @@
+---
+title: "Building in Public: My GitHub Project Portfolio"
+description: |
+  A walkthrough of my open-source projects spanning churn analytics, causal inference, experimentation frameworks, and enterprise-grade data platforms.
+author:
+  - name: Moses Martin Njuguna Gikonyo
+    url: https://github.com/witttingtorch
+date: 2026-03-12
+categories:
+  - Projects
+  - Machine Learning
+  - Data Engineering
+  - Quantitative Finance
+output:
+  distill::distill_article:
+    self_contained: false
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Over the past few years I have been building a portfolio of production-grade data science and analytics systems — publicly available on GitHub. Each project is designed not as a toy example, but as a deployable, enterprise-ready framework. This post walks through the six pinned projects and the thinking behind each one.
+
+---
+
+## 1. Churn Analytics SaaS
+**[github.com/witttingtorch/churn-analytics-saas](https://github.com/witttingtorch/churn-analytics-saas)**
+
+Customer churn is one of the most commercially significant problems in data science. This project is a full PostgreSQL-backed SaaS platform that combines three analytical lenses: retention modelling, survival analysis, and customer lifetime value estimation.
+
+The survival analysis component is particularly important — rather than treating churn as a binary classification problem, it models *time-to-churn*, which gives product and growth teams far more actionable intelligence. Built entirely in Python and designed for production deployment.
+
+**Key methods:** Kaplan-Meier estimator, Cox proportional hazards, LTV modelling, PostgreSQL backend.
+
+---
+
+## 2. A/B Testing & Senior Experimentation Framework
+**[github.com/witttingtorch/ab-testing-senior-experimentation](https://github.com/witttingtorch/ab-testing-senior-experimentation)**
+
+Most A/B testing implementations in industry are statistically naive. This framework is built to senior experimentation standards — covering pre-experiment power analysis, sequential testing, variance reduction techniques, and correct multiple comparison corrections.
+
+It is designed for teams that need to move fast without sacrificing statistical rigour — a balance that is harder to achieve than it sounds.
+
+**Key methods:** Sequential testing, CUPED variance reduction, Bonferroni & BH corrections, power analysis.
+
+---
+
+## 3. Bayesian Incrementality & Geo-Lift
+**[github.com/witttingtorch/bayesian-incrementality-geo-lift](https://github.com/witttingtorch/bayesian-incrementality-geo-lift)**
+
+Marketing attribution is a notoriously difficult causal inference problem. This project implements a Bayesian geo-lift framework — using geographic regions as treatment and control units to estimate the true incremental impact of marketing spend, independent of platform-reported metrics.
+
+This is the methodology used by large-scale advertisers to validate whether their marketing spend is actually driving outcomes, rather than claiming credit for organic behaviour.
+
+**Key methods:** Bayesian causal inference, geo-based experimentation, posterior inference, uncertainty quantification.
+
+---
+
+## 4. Customer Lifetime Value Platform
+**[github.com/witttingtorch/customer-lifetime-value-platform](https://github.com/witttingtorch/customer-lifetime-value-platform)**
+
+CLV is the single most important metric for any subscription or repeat-purchase business. This is a production-grade platform built with SQL, Python, R, Docker, and Kubernetes — designed to scale to enterprise data volumes.
+
+What separates this from most CLV implementations is the infrastructure layer: containerised with Docker, orchestrated with Kubernetes, and built for integration into existing data warehouses.
+
+**Key methods:** BG/NBD model, Gamma-Gamma spend model, SQL pipelines, Docker + Kubernetes deployment.
+
+---
+
+## 5. Funnel & Growth Analytics Platform
+**[github.com/witttingtorch/funnel-growth-analytics-platform](https://github.com/witttingtorch/funnel-growth-analytics-platform)**
+
+A FAANG-style funnel analytics platform built with PostgreSQL, SQL, Python, R, Docker, and Kubernetes. This project models the full user journey from acquisition through activation, retention, and revenue — with each stage instrumented for drop-off analysis and cohort tracking.
+
+The R components handle statistical modelling and visualisation, while the Python and SQL layers manage data ingestion and transformation at scale.
+
+**Key methods:** Funnel analysis, cohort analysis, AARRR framework, full-stack data pipeline.
+
+---
+
+## 6. Observability One
+**[github.com/witttingtorch/observability-one](https://github.com/witttingtorch/observability-one)**
+
+An enterprise-grade observability platform with root cause analysis (RCA), OpenTelemetry integration, and multi-vendor support. This project sits at the intersection of data engineering and site reliability engineering — critical infrastructure for any organisation running complex data pipelines in production.
+
+**Key methods:** OpenTelemetry, RCA algorithms, multi-vendor integrations, distributed tracing.
+
+---
+
+## What Ties These Projects Together
+
+Each of these projects reflects a consistent philosophy: **production-grade over proof-of-concept**. The goal is not to demonstrate that a technique works on a toy dataset, but to build systems that could be deployed in a real organisation tomorrow.
+
+The full portfolio is available at **[github.com/witttingtorch](https://github.com/witttingtorch)**. I am always open to collaboration, feedback, and conversation — particularly on quantitative finance, causal inference, and frontier market applications.
+
