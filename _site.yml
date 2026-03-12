@@ -2,7 +2,7 @@ name: "Moses Martin Njuguna Gikonyo"
 title: "Martin Gikonyo | Data Scientist & Quant"
 description: |
   Data Scientist | Quantitative Financial Engineer | Frontier Market Intelligence | Nairobi, Kenya
-output_dir: "_site"
+output_dir: "docs"
 navbar:
   right:
     - text: "Home"
