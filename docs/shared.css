@@ -83,8 +83,7 @@ nav.site-nav { position:fixed; top:26px; left:0; right:0; height:52px; backgroun
 ::selection { background:var(--gold-dim); color:var(--gold); }
 
 /* ANIMATIONS */
-.reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal { opacity:1; transform:translateY(0); transition:opacity .7s ease, transform .7s ease; }
 
 @media(max-width:768px) {
   nav.site-nav { padding:0 1.5rem; }

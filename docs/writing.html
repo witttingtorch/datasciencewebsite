@@ -191,7 +191,7 @@
     <p style="font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:.5rem">Get notified when I publish</p>
     <input class="nl-field" type="text" placeholder="Your name">
     <input class="nl-field" type="email" placeholder="Your email">
-    <a href="mailto:contact@martingikonyo.com" class="btn-gold" style="text-align:center">Subscribe →</a>
+    <a href="/cdn-cgi/l/email-protection#8eede1e0faefedfacee3effcfae7e0e9e7e5e1e0f7e1a0ede1e3" class="btn-gold" style="text-align:center">Subscribe →</a>
     <p style="font-family:'Syne Mono',monospace;font-size:.55rem;color:var(--dimmer);letter-spacing:.08em;text-align:center">No spam. Unsubscribe anytime.</p>
   </div>
 </section>
@@ -206,7 +206,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
@@ -225,9 +225,4 @@ document.querySelectorAll('.cat-btn').forEach(btn=>{
 });
 
 const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
-},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(r=>revealObs.observe(r));
-</script>
-</body>
-</html>
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visib

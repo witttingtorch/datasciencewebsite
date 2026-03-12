@@ -262,7 +262,7 @@ counters.forEach(c=>countObs.observe(c));
 const revealObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
 },{threshold:.15});
-document.querySelectorAll('.reveal').forEach(r=>revealObs.observe(r));
+document.querySelectorAll(".reveal").forEach(r=>{r.classList.add("visible");});
 </script>
 </body>
 </html>
